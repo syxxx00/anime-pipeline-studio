@@ -1,0 +1,17 @@
+{
+  "profile": "local_creative_observation_6703d7894",
+  "schema_sha256": "e054e4f13162581b49860f9dfd7c552ae715a21b439446dcd03afc9da859a9bd",
+  "grammar_sha256": "3a67121d50dba0e27af879ff98b759ab10b7f62f3dcbe5a8f9f73fa06ff39c84",
+  "grammar": "char ::= [^\"\\\\\\x00-\\x1F] | [\\\\] ([\"\\\\bfnrt] | \"u\" [0-9a-fA-F]{4})\nresponse-format-schema ::= \"{\" space response-format-schema-visible-relationships-kv \",\" space response-format-schema-potential-value-kv \",\" space response-format-schema-problems-kv \",\" space response-format-schema-uncertain-kv space \"}\"\nresponse-format-schema-potential-value ::= \"\\\"\" char* \"\\\"\"\nresponse-format-schema-potential-value-kv ::= \"\\\"potential_value\\\"\" space \":\" space response-format-schema-potential-value\nresponse-format-schema-problems ::= \"[\" space (response-format-schema-problems-item (\",\" space response-format-schema-problems-item){0,7})? space \"]\"\nresponse-format-schema-problems-item ::= \"\\\"\" char* \"\\\"\"\nresponse-format-schema-problems-kv ::= \"\\\"problems\\\"\" space \":\" space response-format-schema-problems\nresponse-format-schema-uncertain ::= \"[\" space (response-format-schema-uncertain-item (\",\" space response-format-schema-uncertain-item){0,7})? space \"]\"\nresponse-format-schema-uncertain-item ::= \"\\\"\" char* \"\\\"\"\nresponse-format-schema-uncertain-kv ::= \"\\\"uncertain\\\"\" space \":\" space response-format-schema-uncertain\nresponse-format-schema-visible-relationships ::= \"\\\"\" char* \"\\\"\"\nresponse-format-schema-visible-relationships-kv ::= \"\\\"visible_relationships\\\"\" space \":\" space response-format-schema-visible-relationships\nroot ::= response-format-schema\nspace ::= [ \\t\\n\\r]*\n",
+  "server_impl_sha256": "1ebbc51e250a8d1f279c345960911fa3e469e88b812de996bbe07c8efc0771a6",
+  "llama_dll_sha256": "c4dd46b7312abdc20fe729384cb79939721d59d626cc17e682b06b7facf78c12",
+  "source_runtime_directory": "work/local_authoring_runtime/20261012_090018_3f94130bc840",
+  "transformation": {
+    "changed": "Defer only sampler string maxLength; retain all complete source schema bytes and SHA binding",
+    "unchanged": "JSON types, exact keys, required members, enum, string minLength and every array minItems/maxItems",
+    "method": "Deterministic pure-JSON GBNF for only two frozen schemas, using schema member order",
+    "length_scope": "Only string maxLength is omitted from sampler GBNF to avoid the installed 6703d7894 repetition parser boundary. String minLength and all array minItems/maxItems remain enforced by this grammar. The complete original schema, text system/prompt and host Pydantic retain every string maximum; overlong responses must be rejected without truncation or repair.",
+    "semantic_correctness_verified": false,
+    "visual_accuracy_verified": false
+  }
+}

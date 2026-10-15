@@ -1,0 +1,21 @@
+{
+  "profile": "local_creative_reference_next_choice_6703d7894",
+  "schema_sha256": "b4f9f92be7fb270e31365afe6f423e3332d6002d632c855f3082697f0b4e0e72",
+  "grammar_sha256": "2dfc213461e524a67d29b8c91529a997c2130b9bf927d4962fb36de2cf2744ac",
+  "grammar": "char ::= [^\"\\\\\\x00-\\x1F] | [\\\\] ([\"\\\\bfnrt] | \"u\" [0-9a-fA-F]{4})\nresponse-format-schema ::= \"{\" space response-format-schema-reference-base-kv \",\" space response-format-schema-operation-kv \",\" space response-format-schema-target-kv \",\" space response-format-schema-objective-kv \",\" space response-format-schema-reason-kv \",\" space response-format-schema-preserve-kv ( \",\" space response-format-schema-denoise-kv )? space \"}\"\nresponse-format-schema-denoise ::= (\"0.\" [0-9]* [1-9] [0-9]* | \"1\" (\".\" \"0\"+)?)\nresponse-format-schema-denoise-kv ::= \"\\\"denoise\\\"\" space \":\" space response-format-schema-denoise\nresponse-format-schema-objective ::= \"\\\"\" char{3,1200} \"\\\"\"\nresponse-format-schema-objective-kv ::= \"\\\"objective\\\"\" space \":\" space response-format-schema-objective\nresponse-format-schema-operation ::= (\"\\\"keep\\\"\" | \"\\\"regenerate\\\"\" | \"\\\"handoff\\\"\" | \"\\\"sketch\\\"\" | \"\\\"local_edit\\\"\" | \"\\\"stop\\\"\")\nresponse-format-schema-operation-kv ::= \"\\\"operation\\\"\" space \":\" space response-format-schema-operation\nresponse-format-schema-preserve ::= \"\\\"\" char{0,1200} \"\\\"\"\nresponse-format-schema-preserve-kv ::= \"\\\"preserve\\\"\" space \":\" space response-format-schema-preserve\nresponse-format-schema-reason ::= \"\\\"\" char{3,1500} \"\\\"\"\nresponse-format-schema-reason-kv ::= \"\\\"reason\\\"\" space \":\" space response-format-schema-reason\nresponse-format-schema-reference-base ::= (\"\\\"parent\\\"\" | \"\\\"child\\\"\" | \"\\\"neither\\\"\")\nresponse-format-schema-reference-base-kv ::= \"\\\"reference_base\\\"\" space \":\" space response-format-schema-reference-base\nresponse-format-schema-target ::= (\"\\\"newbie\\\"\" | \"\\\"illustrious\\\"\" | \"\\\"anima\\\"\" | \"\\\"z_image_turbo\\\"\")\nresponse-format-schema-target-kv ::= \"\\\"target\\\"\" space \":\" space response-format-schema-target\nroot ::= response-format-schema\nspace ::= [ \\t\\n\\r]*\n",
+  "server_impl_sha256": "1ebbc51e250a8d1f279c345960911fa3e469e88b812de996bbe07c8efc0771a6",
+  "llama_dll_sha256": "c4dd46b7312abdc20fe729384cb79939721d59d626cc17e682b06b7facf78c12",
+  "source_runtime_directory": "work/local_authoring_runtime/20261012_090018_3f94130bc840",
+  "transformation": {
+    "changed": "Derive an independent text-only ReferenceNextChoice grammar; the old NextChoice schema and asset are unchanged",
+    "unchanged": "Exact keys, required first six members, optional denoise, reference/operation/target enums, all string minima/maxima, numeric 0 < denoise <= 1 and host default 0.25",
+    "method": "Deterministic preflight grammar for the exact frozen ReferenceNextChoice consumer; not a general JSON Schema converter",
+    "length_scope": "All original text-choice bounds retained: objective 3..1200, reason 3..1500, preserve 0..1200. The complete schema and host validation remain authoritative; reject without truncation or repair.",
+    "numeric_scope": "Sampler accepts JSON decimals without exponents, restricted to 0 < denoise <= 1; omitting denoise preserves the unchanged host default 0.25.",
+    "input_scope": "Text-only reference and purpose-operation choice; no visual profile permission or resource-admission changes",
+    "reference_scope": "The sampler preserves the parent/child/neither enum only. Host validation must check reference availability, actual source/condition bindings and that neither permits only regenerate or stop; syntax does not certify purpose, quality or user approval.",
+    "source_runtime_scope": "Shared installed DLL diagnostic reference only, not a reference-choice response or failure receipt; no model weights are loaded by derivation.",
+    "semantic_correctness_verified": false,
+    "visual_accuracy_verified": false
+  }
+}

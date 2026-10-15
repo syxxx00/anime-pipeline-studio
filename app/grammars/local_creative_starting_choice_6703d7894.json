@@ -1,0 +1,17 @@
+{
+  "profile": "local_creative_starting_choice_6703d7894",
+  "schema_sha256": "0f3462c1fc966b10a335ea090d51153eed7c6c79eebd15511154a92f8d0c5147",
+  "grammar_sha256": "2fe3b01d8dd3df2b25867275f6f8b92105f703597c87b2ff5c588f39768405df",
+  "grammar": "char ::= [^\"\\\\\\x00-\\x1F] | [\\\\] ([\"\\\\bfnrt] | \"u\" [0-9a-fA-F]{4})\nspace ::= [ \\t\\n\\r]*\nroot ::= response-format-schema\nresponse-format-schema ::= \"{\" space \"\\\"target\\\"\" space \":\" space target \",\" space \"\\\"reason\\\"\" space \":\" space reason (\",\" space \"\\\"failure_risks\\\"\" space \":\" space risks)? space \"}\"\ntarget ::= (\"\\\"newbie\\\"\" | \"\\\"illustrious\\\"\" | \"\\\"anima\\\"\" | \"\\\"z_image_turbo\\\"\")\nreason ::= \"\\\"\" char{3,900} \"\\\"\"\nrisk ::= \"\\\"\" char{3,300} \"\\\"\"\nrisks ::= \"[\" space (risk (\",\" space risk){0,2})? space \"]\"\n",
+  "server_impl_sha256": "1ebbc51e250a8d1f279c345960911fa3e469e88b812de996bbe07c8efc0771a6",
+  "llama_dll_sha256": "c4dd46b7312abdc20fe729384cb79939721d59d626cc17e682b06b7facf78c12",
+  "source_runtime_directory": "work/local_authoring_runtime/20261012_090018_3f94130bc840",
+  "transformation": {
+    "changed": "Explicit text-only initial selection grammar; unchanged complete consumer schema",
+    "unchanged": "Exact target enum, required target/reason, optional 0..3 risks, original string bounds and host nonblank validation",
+    "length_scope": "reason 3..900 and risk 3..300 JSON characters; unchanged Pydantic validates decoded string bounds without truncation or repair",
+    "source_runtime_scope": "Binding inherited from the same installed build; no model/starting-choice response is claimed",
+    "semantic_correctness_verified": false,
+    "visual_accuracy_verified": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "profile": "local_creative_next_choice_6703d7894",
+  "schema_sha256": "c0704da2539743cee7c337633414c52dddea057fdb5231f97a3664fcbaed498d",
+  "grammar_sha256": "3fa3d7212fe45d76cddd6b9b9f23278dedd59b7df4dcdc85505def63930ab7ce",
+  "grammar": "char ::= [^\"\\\\\\x00-\\x1F] | [\\\\] ([\"\\\\bfnrt] | \"u\" [0-9a-fA-F]{4})\nresponse-format-schema ::= \"{\" space response-format-schema-operation-kv \",\" space response-format-schema-target-kv \",\" space response-format-schema-objective-kv \",\" space response-format-schema-reason-kv \",\" space response-format-schema-preserve-kv ( \",\" space response-format-schema-denoise-kv )? space \"}\"\nresponse-format-schema-denoise ::= (\"0.\" [0-9]* [1-9] [0-9]* | \"1\" (\".\" \"0\"+)?)\nresponse-format-schema-denoise-kv ::= \"\\\"denoise\\\"\" space \":\" space response-format-schema-denoise\nresponse-format-schema-objective ::= \"\\\"\" char{3,1200} \"\\\"\"\nresponse-format-schema-objective-kv ::= \"\\\"objective\\\"\" space \":\" space response-format-schema-objective\nresponse-format-schema-operation ::= (\"\\\"keep\\\"\" | \"\\\"regenerate\\\"\" | \"\\\"handoff\\\"\" | \"\\\"sketch\\\"\" | \"\\\"local_edit\\\"\" | \"\\\"stop\\\"\")\nresponse-format-schema-operation-kv ::= \"\\\"operation\\\"\" space \":\" space response-format-schema-operation\nresponse-format-schema-preserve ::= \"\\\"\" char{0,1200} \"\\\"\"\nresponse-format-schema-preserve-kv ::= \"\\\"preserve\\\"\" space \":\" space response-format-schema-preserve\nresponse-format-schema-reason ::= \"\\\"\" char{3,1500} \"\\\"\"\nresponse-format-schema-reason-kv ::= \"\\\"reason\\\"\" space \":\" space response-format-schema-reason\nresponse-format-schema-target ::= (\"\\\"newbie\\\"\" | \"\\\"illustrious\\\"\" | \"\\\"anima\\\"\" | \"\\\"z_image_turbo\\\"\")\nresponse-format-schema-target-kv ::= \"\\\"target\\\"\" space \":\" space response-format-schema-target\nroot ::= response-format-schema\nspace ::= [ \\t\\n\\r]*\n",
+  "server_impl_sha256": "1ebbc51e250a8d1f279c345960911fa3e469e88b812de996bbe07c8efc0771a6",
+  "llama_dll_sha256": "c4dd46b7312abdc20fe729384cb79939721d59d626cc17e682b06b7facf78c12",
+  "source_runtime_directory": "work/local_authoring_runtime/20261012_090018_3f94130bc840",
+  "transformation": {
+    "changed": "Derive an explicit text-only NextChoice grammar; no source schema constraint changes",
+    "unchanged": "Exact keys, required first five members, optional denoise, both enums, all string minima/maxima, numeric 0 < denoise <= 1 and host default 0.25",
+    "method": "Normal-turn text-only preflight compatibility check for the frozen NextChoice schema; not an observed NextChoice failure and not validation of general automatic schema conversion",
+    "length_scope": "All original NextChoice string bounds retained: objective 3..1200, reason 3..1500, preserve 0..1200; equivalent complete grammar parsed in the exact installed NULL-vocab sampler. Complete schema and host Pydantic validation remain authoritative; reject without repair.",
+    "numeric_scope": "Sampler accepts valid JSON decimal spelling without exponents, restricted to 0 < denoise <= 1; omitting denoise preserves the original host default 0.25. The unchanged host schema retains original numeric bounds and default.",
+    "input_scope": "Text-only ordinary next-turn selection; no visual profile permission or resource changes",
+    "source_runtime_scope": "The source directory identifies diagnostics for this exact installed DLL build; it is not a NextChoice response or failure receipt",
+    "semantic_correctness_verified": false,
+    "visual_accuracy_verified": false
+  }
+}
