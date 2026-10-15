@@ -1,0 +1,2 @@
+"""NewBie Lab application package."""
+
