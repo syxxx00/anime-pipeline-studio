@@ -1,0 +1,22 @@
+# Reference for manually launched external ComfyUI servers only.
+# Normal application startup generates runtime/generated/extra_model_paths.yaml
+# from Settings.model_root and the current project root, without editing this file.
+# Replace these relative paths if invoking an external Core from another location.
+newbie_lab_models:
+  base_path: ../models
+  checkpoints: checkpoints
+  diffusion_models: |
+    diffusion_models
+    unet
+  text_encoders: |
+    text_encoders
+    clip
+  vae: vae
+  loras: loras
+  ultralytics: ultralytics
+  ultralytics_bbox: ultralytics/bbox
+  ultralytics_segm: ultralytics/segm
+
+ai_comic_engine_extensions:
+  base_path: ..
+  custom_nodes: engine_extensions

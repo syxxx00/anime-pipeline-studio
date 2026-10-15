@@ -1,0 +1,129 @@
+{
+  "id": "arknights",
+  "name": "明日方舟角色知识",
+  "status": "audited_partial",
+  "description": "以 PRTS 角色页和官方游戏立绘为锚点的逐条视觉事实库。只有带来源且已核验的事实会进入提示词。",
+  "source_policy": "PRTS 用于确认角色、异格和外观归属；具体颜色、服装与配件必须由官方游戏立绘直接核验。目录名、剧情描述和第三方标签不能单独成为视觉事实。",
+  "audit_date": "2026-09-04",
+  "operators": [
+    {
+      "id": "w", "family": "W", "name": "W", "tag": "w_(arknights)", "source_url": "https://prts.wiki/w/W",
+      "fixed_visual_facts": [
+        {"value":"shoulder-length silver-gray hair with darker underlayers", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw"},
+        {"value":"straight-cut bangs and loose side locks", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw"},
+        {"value":"amber-orange eyes", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw"},
+        {"value":"two long black horns with vivid red edges rising beside the head", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw"}
+      ],
+      "appearances": [
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/W","visual_facts":[
+          {"value":"black cropped tactical jacket with vivid red lining and red sleeve stripes", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_1"},
+          {"value":"fitted light-gray high-neck shirt and thick black scarf", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_1"},
+          {"value":"black shorts with layered red fabric panels over patterned black tights", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_1"},
+          {"value":"black fingerless tactical gloves and black strapped boots", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/W","visual_facts":[
+          {"value":"black jacket with vivid red inner panels over a fitted gray high-neck shirt", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_2"},
+          {"value":"black fingerless glove with a wide wrist strap", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_113_cqbw_2"}
+        ]},
+        {"id":"hazy","name":"恍惚","kind":"outfit","source_url":"https://prts.wiki/w/时装回廊/时代","visual_facts":[],"catalog_note":"PRTS 已确认该时装归属；尚未逐项核验官方立绘颜色与部件，因此仅参考。"}
+      ]
+    },
+    {
+      "id":"wisadel","family":"W","name":"维什戴尔","tag":"wisadel_(arknights)","source_url":"https://prts.wiki/w/维什戴尔",
+      "fixed_visual_facts":[
+        {"value":"long silver-white hair with dark inner strands", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel"},
+        {"value":"amber-orange eyes", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel"},
+        {"value":"multiple sharp black horns with red edges branching above and beside the head", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel"}
+      ],
+      "appearances":[
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/维什戴尔","visual_facts":[
+          {"value":"black and white combat outfit with vivid red armored mechanical elements", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel_1"},
+          {"value":"black choker and asymmetric dark shoulder pieces", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/维什戴尔","visual_facts":[
+          {"value":"black high-neck bodice framed by red mechanical armor and red cable-like parts", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel_2"},
+          {"value":"silver-white hair spreading around black-and-red horns", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1035_wisdel_2"}
+        ]}
+      ]
+    },
+    {
+      "id":"amiya_caster","family":"阿米娅","name":"阿米娅（术师）","tag":"amiya_(arknights)","source_url":"https://prts.wiki/w/阿米娅",
+      "fixed_visual_facts":[
+        {"value":"very long straight brown hair with long side locks", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya"},
+        {"value":"large upright dark-brown rabbit ears", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya"},
+        {"value":"bright teal-blue eyes", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya"}
+      ],
+      "appearances":[
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/阿米娅","visual_facts":[
+          {"value":"oversized black hooded coat with teal-blue lining and long blue inner tails", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_1"},
+          {"value":"white ribbed blouse above a short blue plaid pleated skirt", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_1"},
+          {"value":"opaque black tights and dark low shoes with teal crystal accents", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_1"},
+          {"value":"wide teal shoulder sash carrying white Rhodes Island lettering", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/阿米娅","visual_facts":[
+          {"value":"deep black hood with angular teal-blue panels and a rigid visor-like brim", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_2"},
+          {"value":"black and teal Rhodes Island coat with a wide blue lettered sash", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_002_amiya_2"}
+        ]},
+        {"id":"planter","name":"播种者","kind":"outfit","source_url":"https://prts.wiki/w/时装回廊/忒斯特收藏","visual_facts":[],"catalog_note":"已确认时装目录归属，具体视觉事实待官方立绘逐项核验。"}
+      ]
+    },
+    {
+      "id":"viviana","family":"薇薇安娜","name":"薇薇安娜","tag":"viviana_(arknights)","source_url":"https://prts.wiki/w/薇薇安娜",
+      "fixed_visual_facts":[
+        {"value":"long wavy pale-blonde hair", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana"},
+        {"value":"pale blue eyes", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana"},
+        {"value":"large natural brown branching deer antlers", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana"}
+      ],
+      "appearances":[
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/薇薇安娜","visual_facts":[
+          {"value":"white hooded mantle with black straps, metal buckles and deep red lining", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana_1"},
+          {"value":"black corset-like dress over a white lace-up bodice", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana_1"},
+          {"value":"black gloves and an ornate bronze pendant", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/薇薇安娜","visual_facts":[
+          {"value":"white and pale-blue mantle with black edging and deep red inner accents", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana_2"},
+          {"value":"black structured bodice with white lacing and small green crystal ornament", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_4098_vvana_2"}
+        ]},
+        {"id":"from_wolumonde","name":"寄自奥格尼斯科","kind":"outfit","source_url":"https://prts.wiki/w/时装回廊/时代","visual_facts":[],"catalog_note":"已确认时装目录归属，具体视觉事实待官方立绘逐项核验。"}
+      ]
+    },
+    {
+      "id":"specter","family":"幽灵鲨","name":"幽灵鲨","tag":"specter_(arknights)","source_url":"https://prts.wiki/w/幽灵鲨",
+      "fixed_visual_facts":[
+        {"value":"long silver-white hair with short jagged bangs", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost"},
+        {"value":"vivid red eyes and pale skin", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost"}
+      ],
+      "appearances":[
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/幽灵鲨","visual_facts":[
+          {"value":"oversized black nun veil with a wide off-white inner border and forehead strap", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_1"},
+          {"value":"dark gray cropped jacket with multiple black buckle straps over a white high-neck underlayer", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_1"},
+          {"value":"layered black white and deep-blue skirt with torn pointed hems", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_1"},
+          {"value":"black thigh-high stockings with garter straps and a long gold necklace", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/幽灵鲨","visual_facts":[
+          {"value":"large black nun veil with an off-white inner border and dark forehead strap", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_2"},
+          {"value":"dark gray oversized jacket with clustered black buckles and a long gold necklace", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_143_ghost_2"}
+        ]}
+      ]
+    },
+    {
+      "id":"specter_unchained","family":"幽灵鲨","name":"归溟幽灵鲨","tag":"specter_the_unchained_(arknights)","source_url":"https://prts.wiki/w/归溟幽灵鲨",
+      "fixed_visual_facts":[
+        {"value":"long silver-white hair with jagged bangs", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2"},
+        {"value":"vivid red eyes and pale skin", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2"}
+      ],
+      "appearances":[
+        {"id":"default","name":"默认立绘","kind":"base","source_url":"https://prts.wiki/w/归溟幽灵鲨","visual_facts":[
+          {"value":"very large white angular nun-like headdress with black rim and blue accents", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2_1"},
+          {"value":"black sleeveless dress with a white chest panel, black crisscross harness and gold buttons", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2_1"},
+          {"value":"asymmetric black straps with small blue and red technical accents", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2_1"}
+        ]},
+        {"id":"elite_2","name":"精英二立绘","kind":"elite","source_url":"https://prts.wiki/w/归溟幽灵鲨","visual_facts":[
+          {"value":"large white angular headdress with black rim and blue insets", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2_2"},
+          {"value":"black translucent sleeveless bodice with white collar panels and asymmetric black straps", "status":"verified", "evidence_type":"official_art_observation", "asset_key":"char_1023_ghost2_2"}
+        ]},
+        {"id":"born_as_one","name":"生而为一","kind":"outfit","source_url":"https://prts.wiki/w/时装回廊/斗争血脉","visual_facts":[],"catalog_note":"已确认时装目录归属，具体视觉事实待官方立绘逐项核验。"}
+      ]
+    }
+  ]
+}

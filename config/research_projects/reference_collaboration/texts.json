@@ -1,0 +1,156 @@
+[
+  {
+    "id": "t01_minimal",
+    "name": "极简输入",
+    "text": "一个人静静地坐在海边。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t02_poetic",
+    "name": "抽象意境",
+    "text": "明日方舟的幽灵鲨坐在礁石上，此时正是黄昏，云朵像暴风雨的前奏一样，风中都带着轻快，她似乎是放空了大脑，平静地坐在那里，就像一座雕塑。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t03_precise",
+    "name": "道具与手部关系",
+    "text": "明日方舟的W坐在仓库的木箱上，右手握着黑色长方形起爆器，拇指搭在顶部唯一的红色按钮上，左手放在膝上。半身画面，右手与起爆器的接触关系清楚。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t04_dense",
+    "name": "高信息量",
+    "text": "一位短黑发的成年女性穿浅色雨衣站在夜间车站左侧，左手提透明雨伞，右手拿红色车票。画面右侧是一排空座椅，远处列车正在离站。地面有连续的积水倒影，人物全身入画，蓝色环境光与站台暖光分开，雨伞不能挡住脸。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t05_no_extra",
+    "name": "否定与留白",
+    "text": "一个黑发成年人坐在空房间里，双手放在膝盖上。房间只有一把椅子，没有窗户、植物和其他人物。留出大片空白。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t06_new_person",
+    "name": "风格迁移到新人物",
+    "text": "画一位戴圆眼镜的红发成年女旅人，穿绿色长外套，在沙漠小镇喝茶。人物与服装以这段文字为准，只从参考图借鉴已选择的参考维度。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t07_no_person",
+    "name": "迁移到无人物场景",
+    "text": "画一条没有人物的雨后街道，咖啡店的暖光映在路面上，远处有一辆停着的蓝色自行车。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t08_objects",
+    "name": "迁移到静物",
+    "text": "画木桌上的白色陶瓷茶壶、两个透明玻璃杯和一枝黄色花，清楚表现各自的形状与相互位置，没有人物。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t09_layout",
+    "name": "构图但换内容",
+    "text": "沿用所选构图参考的镜头与主体位置，把主体换成穿绿色长外套的红发成年女旅人，把场景换成沙漠小镇。不要继承参考中的脸、服装或画风。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t10_pose",
+    "name": "姿态但换人物",
+    "text": "沿用所选姿态参考的身体动作与手势，画一个戴眼镜的黑发成年男子，穿灰色运动服，背景是明亮的室内运动场。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t11_identity",
+    "name": "保身份换环境",
+    "text": "画所选人物参考中的同一个角色，保持其可辨认的身份特征，换到黄昏海岸上，平静地坐在礁石上。构图和动作按此描述决定。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t12_outfit",
+    "name": "身份与服装分离",
+    "text": "人物身份来自人物参考，服装来自单独指定的服装参考。人物站在纯色背景前，全身入画；不要把服装参考中的人脸一起带过来。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t13_two_people",
+    "name": "多人物绑定",
+    "text": "人物A站在画面左侧拿着白色杯子，人物B坐在右侧长凳上看向A。各自身份与服装遵循明确绑定的参考，不能交换脸、发色或服装。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t14_w",
+    "name": "W身份基线",
+    "text": "明日方舟的W，使用已确认的指定外观，在白色背景前自然站立，全身入画，不持道具。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t15_wisadel",
+    "name": "异格身份边界",
+    "text": "明日方舟的维什戴尔，使用已确认的指定外观，在白色背景前自然站立，全身入画，不持道具。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t16_amiya",
+    "name": "阿米娅术士基线",
+    "text": "明日方舟的阿米娅，术士形象，使用已确认的指定外观，在窗边阅读一本书。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t17_specter",
+    "name": "幽灵鲨身份基线",
+    "text": "明日方舟的幽灵鲨，非归溟幽灵鲨，使用已确认的指定外观，在空旷的长廊里缓慢行走。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t18_conflict",
+    "name": "显式冲突",
+    "text": "人物必须站在画面左侧，同时必须原样复制构图参考中人物位于画面右侧的构图。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t19_text",
+    "name": "画中文字",
+    "text": "画一间咖啡店的门面，门口的牌子上明确写着“今天也要开心”，其余没有可读文字。参考图只用于被选择的画风与光照，不复制其中的标识。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t20_batch",
+    "name": "多参考合成",
+    "text": "用画风参考决定绘制方式，用人物参考确定角色，用构图参考安排位置。画这个角色坐在花园长椅上读信，背景连续，服装按已选择的外观参考。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t21_chibi",
+    "name": "Q版与身份",
+    "text": "把所选人物画成Q版，坐在一个很大的白色茶杯旁，开心地挥手。保持其身份特征，但不要照搬人物参考的正常头身比例。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  },
+  {
+    "id": "t22_literal_style",
+    "name": "文字画风约束",
+    "text": "画一位黑发成年女性在花园里散步，明确使用平涂、清晰轮廓线、少量阴影。若参考图与此要求冲突，不能悄悄改成厚涂。",
+    "status": "awaiting_user_confirmation",
+    "approved": false
+  }
+]

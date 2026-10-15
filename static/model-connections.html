@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark"><title>模型接入 · Pipeline Studio</title>
+  <link rel="stylesheet" href="/assets/model-connections.css">
+  <script src="/assets/model-connections.js" defer></script>
+</head>
+<body>
+  <header class="bar"><a class="brand" href="/">✦ Pipeline <strong>Studio</strong></a><a href="/">返回创作台 ↗</a></header>
+  <main>
+    <header class="intro"><span class="eyebrow">MODEL CONNECTIONS</span><h1>接入你自己的模型</h1>
+      <p>配置图像引擎与理解模型。模型之间如何协作，仍由当前作品、你的选择和实际结果决定。</p></header>
+    <section class="notice"><strong>配置不会启动、下载或切换模型。</strong>
+      <p>相对路径以本项目目录为起点；图像权重填分类目录内的相对文件名。保存后使用停止、启动 BAT 重载配置。</p>
+      <p>“兼容服务”会把构想、选中的概念原文及需要观察的图片发送到你指定的地址。使用云端前，请确认服务的数据政策。这里只填写密钥的环境变量名，不保存密钥。</p></section>
+    <div class="layout"><nav class="sections" id="sections" aria-label="接入配置分类"></nav>
+      <form id="connections" autocomplete="off"><div id="fields"></div>
+        <footer class="actions"><button type="submit" id="save" class="primary" disabled>保存配置</button>
+          <button type="button" id="validate" disabled>检查文件与配置</button>
+          <button type="button" id="probe" disabled>探测服务连接</button>
+          <button type="button" id="reload">重新读取</button></footer>
+      </form></div>
+    <section class="result" aria-live="polite" aria-atomic="false"><h2>接入状态</h2>
+      <p id="status" role="status">正在读取配置…</p><ul id="checks"></ul>
+      <details id="local-registration"><summary>本地 GGUF 运行器的语法登记</summary>
+        <p>文件检查会核对 DLL 与语法文件的配套关系，不加载 DLL。若当前构建不匹配内置绑定，再显式登记此版本的原生语法支持；登记只运行语法解析，不加载 GGUF，也不覆盖其他版本的已有登记。切换运行器时请同时选择新的语法配置目录。</p>
+        <button type="button" id="bind" disabled>检查并登记当前运行器</button></details>
+      <p class="hint">文件齐备、服务可达、实际推理是三个不同状态。完整创作还需要图像模型与兼容的视觉理解能力；不必准备全部四类图像模型。</p>
+    </section>
+  </main>
+</body></html>

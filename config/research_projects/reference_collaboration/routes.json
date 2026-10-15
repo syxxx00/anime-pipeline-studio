@@ -1,0 +1,201 @@
+[
+  {
+    "id": "single_newbie",
+    "kind": "single",
+    "models": [
+      "newbie"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "single_anima",
+    "kind": "single",
+    "models": [
+      "anima"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "single_illustrious",
+    "kind": "single",
+    "models": [
+      "illustrious"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "single_z_image_turbo",
+    "kind": "single",
+    "models": [
+      "z_image_turbo"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_newbie_to_newbie",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "newbie",
+      "newbie"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_newbie_to_anima",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "newbie",
+      "anima"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_newbie_to_illustrious",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "newbie",
+      "illustrious"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_newbie_to_z_image_turbo",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "newbie",
+      "z_image_turbo"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_anima_to_newbie",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "anima",
+      "newbie"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_anima_to_anima",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "anima",
+      "anima"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_anima_to_illustrious",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "anima",
+      "illustrious"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_anima_to_z_image_turbo",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "anima",
+      "z_image_turbo"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_illustrious_to_newbie",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "illustrious",
+      "newbie"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_illustrious_to_anima",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "illustrious",
+      "anima"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_illustrious_to_illustrious",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "illustrious",
+      "illustrious"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_illustrious_to_z_image_turbo",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "illustrious",
+      "z_image_turbo"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_z_image_turbo_to_newbie",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "z_image_turbo",
+      "newbie"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_z_image_turbo_to_anima",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "z_image_turbo",
+      "anima"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_z_image_turbo_to_illustrious",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "z_image_turbo",
+      "illustrious"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "pixel_z_image_turbo_to_z_image_turbo",
+    "kind": "fixed_pixel_control",
+    "models": [
+      "z_image_turbo",
+      "z_image_turbo"
+    ],
+    "roles_assumed": false
+  },
+  {
+    "id": "autonomous",
+    "kind": "result_dependent",
+    "allowed_models": [
+      "newbie",
+      "anima",
+      "illustrious",
+      "z_image_turbo"
+    ],
+    "sequence": null,
+    "roles_assumed": false,
+    "tools_to_audit": [
+      "generate",
+      "pixel_handoff",
+      "regional_edit",
+      "reference_condition",
+      "text_render",
+      "branch",
+      "rollback",
+      "finish"
+    ],
+    "status": "executor_incomplete"
+  }
+]

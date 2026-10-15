@@ -1,0 +1,89 @@
+{
+  "_说明": "check 系统的风格区分规则。风格类别由 app/checks.py 从请求的 style 标签解析；每类风格决定哪些检查启用、阈值如何覆盖。美学分用 anime_dbaesthetic 百分位（0-1，越高越好；warn_below/aesthetic_floor 均为百分位下限）。text 的 wd14_hint 是 WD14 文字类标签（clothes_writing 等）的兜底报告阈值：文字检测器未命中但该标签超过阈值时报告疑似文字（只报告不修复）；scene_text_conf 是场景文字第二检测器（只报告）的展示阈值；protect_character_text=true 时人物框内的文字不自动清除（角色设定内容不能擦），只报告 text_on_character。所有阈值都是待校准的占位默认值（遵守：不要把特殊当一般，须跨样本验证后调整）。",
+  "_风格判定线索": {
+    "chibi": ["chibi", "q版"],
+    "poster": ["poster", "movie_poster", "cover", "海报", "albumcover"],
+    "flat": ["flat_color", "flat_lighting", "vector_art", "pop_art", "sticker", "emblem_style", "hard_edge", "limited_palette", "平涂"],
+    "painterly": ["oil_painting", "painterly", "thick_brushstrokes", "cross-hatching", "impasto", "厚涂", "油画"],
+    "cel": ["cel_shading", "cel-shading", "animation_screenshot", "flat_art", "赛璐璐", "动画截图"],
+    "realistic": ["realistic_shading", "cinematic_lighting", "physically_based_rendering", "pbr", "chiaroscuro", "rim_light", "volumetric_light", "ray_tracing", "global_illumination", "写实光影", "realistic_lighting"]
+  },
+  "_判定优先级": ["chibi", "poster", "flat", "painterly", "cel", "realistic"],
+  "standard": {
+    "checks": {
+      "text": {"enabled": true, "wd14_hint": 0.5, "scene_text_conf": 0.2, "protect_character_text": true},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.3},
+      "style_era": {"enabled": true},
+      "background": {"enabled": true, "simple_bg_threshold": 0.5},
+      "aesthetic": {"enabled": true, "warn_below": 0.4}
+    }
+  },
+  "realistic": {
+    "checks": {
+      "text": {"enabled": true},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.3},
+      "style_era": {"enabled": true},
+      "background": {"enabled": true, "simple_bg_threshold": 0.35},
+      "aesthetic": {"enabled": true, "warn_below": 0.4}
+    }
+  },
+  "painterly": {
+    "checks": {
+      "text": {"enabled": true},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.3},
+      "style_era": {"enabled": true},
+      "background": {"enabled": true, "simple_bg_threshold": 0.45},
+      "aesthetic": {"enabled": true, "warn_below": 0.4}
+    }
+  },
+  "cel": {
+    "checks": {
+      "text": {"enabled": true},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.25},
+      "style_era": {"enabled": true},
+      "background": {"enabled": true, "simple_bg_threshold": 0.6},
+      "aesthetic": {"enabled": true, "warn_below": 0.35}
+    }
+  },
+  "flat": {
+    "checks": {
+      "text": {"enabled": true},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.25},
+      "style_era": {"enabled": false},
+      "background": {"enabled": false},
+      "aesthetic": {"enabled": true, "warn_below": 0.35}
+    }
+  },
+  "chibi": {
+    "checks": {
+      "text": {"enabled": true},
+      "hands": {"enabled": true, "conf": 0.6, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.3},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.2},
+      "style_era": {"enabled": false},
+      "background": {"enabled": true, "simple_bg_threshold": 0.7},
+      "aesthetic": {"enabled": true, "warn_below": 0.3}
+    }
+  },
+  "poster": {
+    "checks": {
+      "text": {"enabled": false},
+      "hands": {"enabled": true, "conf": 0.5, "max_regions": 4},
+      "faces": {"enabled": true, "min_conf": 0.4},
+      "breakdown": {"enabled": true, "aesthetic_floor": 0.3},
+      "style_era": {"enabled": true},
+      "background": {"enabled": true, "simple_bg_threshold": 0.6},
+      "aesthetic": {"enabled": true, "warn_below": 0.4}
+    }
+  }
+}

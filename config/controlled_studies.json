@@ -1,0 +1,1168 @@
+{
+  "schema": "controlled_studies/2",
+  "name": "问题驱动的模型与管线实验",
+  "requires_reference_upload": false,
+  "principles": [
+    "完整场景契约是输入与检查的共同来源；保留角色、外观、服装、物体、关系、构图、画风和禁止项。",
+    "四个模型分别配置正负提示词、采样与权重精度；配置来源可查，不声称已是最优。",
+    "默认选择完整矩阵；匹配的已完成基线可跨实验复用，人工查看后创建。只有缺少有效基线时才需单独校验配置，不自动降级。",
+    "直接编辑模型文本须记录原因；中文意图不自动翻译，契约与实际英文/XML 均需审阅。",
+    "全部模型、全部双向交接和同模型交接保留；完整矩阵强度与 Seed 可编辑。创建暂停，不自动开跑。"
+  ],
+  "studies": [
+    {
+      "id": "format",
+      "name": "01 同一场景：统一英文与完整原生输入",
+      "available": true,
+      "question": "同一场景要求，以统一英文和每个模型完整适配后的输入分别生成，会获得什么、损失什么？",
+      "change": "统一英文条件 vs 完整原生编译条件（含模型标签/质量条件）；可直接编辑各模型实际文本。",
+      "hold": "同一模型的负面词、采样、尺寸和 Seed 固定；检查使用同一场景契约。",
+      "inspect": [
+        "构图/物体是否遗漏",
+        "NewBie XML是否帮助对应",
+        "不同表示是否引入风格变化"
+      ],
+      "limits": "这是两套完整输入条件的比较，不是纯标点/XML 语法实验；原生编译不等于经实测的最佳提示词。",
+      "default_images": 72
+    },
+    {
+      "id": "detail",
+      "name": "02 信息增量：哪些细节值得补？",
+      "available": true,
+      "question": "短句省略的动作、空间和接触细节，明确补入后是否改善执行？",
+      "change": "同一潜在画面意图的简略字段与详细字段。",
+      "hold": "同一模型、采样、负面基线、原生编译器、画幅与 Seed；新增禁止项会显式体现在实际负面文本中。",
+      "inspect": [
+        "新增要求是否实际画出",
+        "补词有无带来多余碎片/错误物体",
+        "原本好看的风格是否受损"
+      ],
+      "limits": "短句未提供的细节不是模型违令；不能把人工编写补词的效果当作自动拓词已完成。美感与描述还原分别评价。",
+      "default_images": 72
+    },
+    {
+      "id": "handoff",
+      "name": "03 同源图：交给谁、改多少？",
+      "available": true,
+      "question": "同一源图交给不同目标模型和重绘强度后，获得了什么、丢失了什么？",
+      "change": "4种源模型 × 4种目标模型 × 可编辑的重绘强度；包括同模型再处理、全部双向交接。",
+      "hold": "每个场景/Seed先生成四张源图，各目标直接复用对应原图；目标文本与目标采样参数固定，禁用自动修脸、手部重绘与文字擦除。",
+      "inspect": [
+        "与源图相比人物/画风的收益",
+        "道具/关系/背景的损失",
+        "是否只是抹平细节",
+        "方向与强度如何影响变化"
+      ],
+      "limits": "这是自主迭代可用动作的受控边界实验，不是固定的最终管线。像素交接不保证角色或语义保持；各源图SHA256和全部中间版本保存。",
+      "default_images": 468
+    },
+    {
+      "id": "loops",
+      "name": "04 循环交接：回来后有没有变好？",
+      "available": true,
+      "question": "模型回访能否同时保住优点和改善问题，还是仅累积变化？由你比较每一步并留下评价。",
+      "change": "双模型 A→B→A→B 对照 A→B→B→B；含同模型重复。可切换三模型 A→B→C→A，对照 A→B→B→A。四模型均可处于任意位置。",
+      "hold": "同一场景、Seed、目标模型完整文本与采样设置；每个目标的交接强度单独固定。共享前缀只生成一次，后续接收直接父版本的真实像素。",
+      "inspect": ["目标问题是否改善", "原来的优点是否保留", "何时出现漂移或振荡", "最佳版本停在第几步", "多模型回访相对连续使用一个模型是否有益"],
+      "limits": "这是为人类比较准备的受控多轮路径，不是看图自动决策的最终闭环。同次数不是同耗时；不同模型的强度不等效。本次冻结输入、不自动改词或局部修复。源图36张仍在新实验内生成；复用的是本次所有共享前缀和匹配基线的校验资格，不跨历史实验借用图片。",
+      "default_images": 684
+    },
+    {
+      "id": "autonomous",
+      "name": "05 自主迭代：是否会正确选择下一步？",
+      "available": false,
+      "question": "在相同预算下，观察中间图后的动态选择能否胜过固定策略，并知道何时回退或结束？",
+      "change": "决策策略；模型动作库与预算应相同。",
+      "hold": "相同用户意图、模型资源、预算与结果可见范围。",
+      "inspect": [
+        "观察是否有图像依据",
+        "动作是否对应实际问题",
+        "回退与停止是否合理"
+      ],
+      "limits": "当前缺少接通并验证的视觉决策器与研究队列调度；暂不可创建，不以固定四候选冒充。此缺项与参考图上传功能无关。"
+    }
+  ],
+  "defaults": {
+    "seeds": [
+      42,
+      3407,
+      123456
+    ],
+    "width": 1024,
+    "height": 1024,
+    "cases": [
+      {
+        "id": "reef",
+        "name": "礁石与安静的人物",
+        "intent": "一个银色短发的成年女性穿黑色长裙，平静地坐在黄昏的礁石上，像一座雕塑。厚重的云层暗示风暴将至，但风很轻。人物与海岸需要完整可读。这里使用原创角色，不验证幽灵鲨知识。",
+        "short": {
+          "version": "3.0",
+          "source_text": "一个银色短发的成年女性穿黑色长裙，平静地坐在黄昏的礁石上，像一座雕塑。厚重的云层暗示风暴将至，但风很轻。人物与海岸需要完整可读。这里使用原创角色，不验证幽灵鲨知识。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "an adult woman",
+              "model_tags": {},
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "short silver hair"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.clothing",
+                  "name": "clothing",
+                  "values": [
+                    "a black long dress"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting quietly on a coastal rock at dusk"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "rock",
+              "kind": "object",
+              "name": "coastal rock",
+              "constraints": []
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "sea and clouds"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting on",
+              "object_ref": "rock",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": []
+          },
+          "style": {
+            "description": [
+              "2D anime illustration, restrained painterly shading"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。"
+          ]
+        },
+        "detailed": {
+          "version": "3.0",
+          "source_text": "一个银色短发的成年女性穿黑色长裙，平静地坐在黄昏的礁石上，像一座雕塑。厚重的云层暗示风暴将至，但风很轻。人物与海岸需要完整可读。这里使用原创角色，不验证幽灵鲨知识。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "an adult woman",
+              "model_tags": {},
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "short silver hair"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.clothing",
+                  "name": "clothing",
+                  "values": [
+                    "a black long dress"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting upright and motionless on a coastal rock like a statue, both hands resting on her knees, distant unfocused gaze, entire seated figure visible"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.left_hand",
+                  "name": "left_hand",
+                  "values": [
+                    "resting on her own left knee"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.right_hand",
+                  "name": "right_hand",
+                  "values": [
+                    "resting on her own right knee"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.expression",
+                  "name": "expression",
+                  "values": [
+                    "distant unfocused gaze"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "rock",
+              "kind": "object",
+              "name": "coastal rock",
+              "constraints": []
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "a continuous rocky shoreline and sea at dusk, heavy layered storm clouds, warm light along the horizon, a light breeze moving the dress hem"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting on",
+              "object_ref": "rock",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": [
+              "entire seated figure visible"
+            ]
+          },
+          "style": {
+            "description": [
+              "2D anime illustration, restrained painterly shading"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。"
+          ]
+        },
+        "inspect": [
+          "坐姿与手膝接触",
+          "背景连续而不是碎片",
+          "宁静与风暴前奏同时存在",
+          "脸部/衣服风格"
+        ],
+        "prompt_overrides": {}
+      },
+      {
+        "id": "detonator",
+        "name": "W与起爆器",
+        "intent": "明日方舟的W坐在仓库木箱上，右手握着黑色长方形起爆器，拇指搭在顶部唯一的红色按钮上，左手放在膝上。半身画面，接触关系清楚。此轮只使用角色名，未注入已验证外观知识或LoRA。",
+        "short": {
+          "version": "3.0",
+          "source_text": "明日方舟的W坐在仓库木箱上，右手握着黑色长方形起爆器，拇指搭在顶部唯一的红色按钮上，左手放在膝上。半身画面，接触关系清楚。此轮只使用角色名，未注入已验证外观知识或LoRA。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "W from Arknights",
+              "model_tags": {
+                "newbie": [
+                  "w_(arknights)"
+                ],
+                "illustrious": [
+                  "w_(arknights)"
+                ],
+                "anima": [
+                  "w_(arknights)"
+                ],
+                "z_image": [
+                  "w_(arknights)"
+                ]
+              },
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting on a wooden crate holding a detonator"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "crate",
+              "kind": "object",
+              "name": "wooden crate",
+              "constraints": []
+            },
+            {
+              "id": "detonator",
+              "kind": "object",
+              "name": "detonator",
+              "constraints": []
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "a dim warehouse"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting on",
+              "object_ref": "crate",
+              "strength": "required"
+            },
+            {
+              "id": "relation_2",
+              "subject_ref": "character",
+              "predicate": "gripping",
+              "object_ref": "detonator",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": []
+          },
+          "style": {
+            "description": [
+              "2D anime illustration, clean linework, flat cel shading"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。",
+            "W 只提供身份标签，未注入已核验外观、皮肤或 LoRA；身份与道具执行需分开观察。"
+          ]
+        },
+        "detailed": {
+          "version": "3.0",
+          "source_text": "明日方舟的W坐在仓库木箱上，右手握着黑色长方形起爆器，拇指搭在顶部唯一的红色按钮上，左手放在膝上。半身画面，接触关系清楚。此轮只使用角色名，未注入已验证外观知识或LoRA。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "W from Arknights",
+              "model_tags": {
+                "newbie": [
+                  "w_(arknights)"
+                ],
+                "illustrious": [
+                  "w_(arknights)"
+                ],
+                "anima": [
+                  "w_(arknights)"
+                ],
+                "z_image": [
+                  "w_(arknights)"
+                ]
+              },
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting on a wooden crate, right hand gripping one black rectangular detonator, right thumb resting on its single red top button, left hand resting on her knee, waist-up view, gripping fingers and the button clearly visible"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.right_hand",
+                  "name": "right_hand",
+                  "values": [
+                    "gripping the detonator, thumb resting on its single red top button"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.left_hand",
+                  "name": "left_hand",
+                  "values": [
+                    "resting on her own knee"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "crate",
+              "kind": "object",
+              "name": "wooden crate",
+              "constraints": []
+            },
+            {
+              "id": "detonator",
+              "kind": "object",
+              "name": "detonator",
+              "constraints": [
+                {
+                  "id": "detonator.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "one black rectangular device",
+                    "one single red button on its top"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "a dim warehouse with a coherent floor and shelves behind her"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting on",
+              "object_ref": "crate",
+              "strength": "required"
+            },
+            {
+              "id": "relation_2",
+              "subject_ref": "character.right_hand",
+              "predicate": "gripping",
+              "object_ref": "detonator",
+              "strength": "required"
+            },
+            {
+              "id": "relation_3",
+              "subject_ref": "character.right_thumb",
+              "predicate": "resting on",
+              "object_ref": "detonator.top_button",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": [
+              "waist-up view, face and both hands within frame"
+            ]
+          },
+          "style": {
+            "description": [
+              "2D anime illustration, clean linework, flat cel shading"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。",
+            "W 只提供身份标签，未注入已核验外观、皮肤或 LoRA；身份与道具执行需分开观察。"
+          ]
+        },
+        "inspect": [
+          "起爆器形状与唯一按钮",
+          "左右手不交换",
+          "手与道具实际接触",
+          "原图独特画风是否保留"
+        ],
+        "prompt_overrides": {}
+      },
+      {
+        "id": "chibi",
+        "name": "Q版与茶杯",
+        "intent": "一个红色双马尾、穿黄色雨衣的成年女性画成Q版，坐在白色大茶杯旁边，右手向观众挥手，左手放在自己膝上。柔和的浅蓝色背景，只有这一只茶杯。",
+        "short": {
+          "version": "3.0",
+          "source_text": "一个红色双马尾、穿黄色雨衣的成年女性画成Q版，坐在白色大茶杯旁边，右手向观众挥手，左手放在自己膝上。柔和的浅蓝色背景，只有这一只茶杯。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "an adult woman",
+              "model_tags": {},
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "red twin tails",
+                    "chibi proportions"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.clothing",
+                  "name": "clothing",
+                  "values": [
+                    "a yellow raincoat"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting beside a white teacup and waving"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cup",
+              "kind": "object",
+              "name": "white teacup",
+              "constraints": []
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "a pale blue background"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting beside",
+              "object_ref": "cup",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": []
+          },
+          "style": {
+            "description": [
+              "cute 2D anime illustration, rounded shapes, simple cel shading",
+              "chibi"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。"
+          ]
+        },
+        "detailed": {
+          "version": "3.0",
+          "source_text": "一个红色双马尾、穿黄色雨衣的成年女性画成Q版，坐在白色大茶杯旁边，右手向观众挥手，左手放在自己膝上。柔和的浅蓝色背景，只有这一只茶杯。",
+          "entities": [
+            {
+              "id": "character",
+              "kind": "character",
+              "name": "an adult woman",
+              "model_tags": {},
+              "constraints": [
+                {
+                  "id": "character.gender",
+                  "name": "gender",
+                  "values": [
+                    "1girl, solo"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "red twin tails",
+                    "chibi proportions"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.clothing",
+                  "name": "clothing",
+                  "values": [
+                    "a yellow raincoat"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.body_action",
+                  "name": "body_action",
+                  "values": [
+                    "sitting to the left of one large white teacup, right hand raised waving toward the viewer, left hand resting on her knee, character and cup fully inside frame, a clear gap between the body and cup"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.right_hand",
+                  "name": "right_hand",
+                  "values": [
+                    "raised waving toward the viewer"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                },
+                {
+                  "id": "character.left_hand",
+                  "name": "left_hand",
+                  "values": [
+                    "resting on her own knee"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cup",
+              "kind": "object",
+              "name": "white teacup",
+              "constraints": [
+                {
+                  "id": "cup.appearance",
+                  "name": "appearance",
+                  "values": [
+                    "one large white teacup"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "environment",
+              "kind": "environment",
+              "name": "scene environment",
+              "constraints": [
+                {
+                  "id": "environment.background",
+                  "name": "background",
+                  "values": [
+                    "a plain pale blue background with a soft contact shadow under the character and the single cup"
+                  ],
+                  "strength": "required",
+                  "preserve_across_stages": true,
+                  "evidence": [
+                    {
+                      "kind": "default",
+                      "reference": "config/controlled_studies.json",
+                      "verified": false,
+                      "note": "实验设计者编写的条件，非已核验角色知识"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "id": "relation_1",
+              "subject_ref": "character",
+              "predicate": "sitting to the left of",
+              "object_ref": "cup",
+              "strength": "required"
+            }
+          ],
+          "composition": {
+            "framing": [
+              "character and cup fully inside frame"
+            ]
+          },
+          "style": {
+            "description": [
+              "cute 2D anime illustration, rounded shapes, simple cel shading",
+              "chibi"
+            ]
+          },
+          "text_intents": [],
+          "global_exclusions": [],
+          "assumptions": [
+            "人工编写研究条件，不代表自动拓词或已核验角色知识。"
+          ]
+        },
+        "inspect": [
+          "Q版比例不被洗掉",
+          "挥手与茶杯边缘分开",
+          "单一道具不增殖",
+          "线条与上色"
+        ],
+        "prompt_overrides": {}
+      }
+    ],
+    "models": {
+      "newbie": {
+        "parameters": {
+          "steps": 28,
+          "cfg": 4.5,
+          "sampler": "res_multistep",
+          "scheduler": "linear_quadratic",
+          "shift": 6,
+          "cfg_rescale": 0.9,
+          "weight_dtype": "default",
+          "lora_name": null,
+          "lora_strength": 0.75
+        },
+        "negative": "<danbooru_tags>furry, english text, chinese text, korean text, speech bubble, dated, logo, signature, watermark, web address, artist name, character name, copyright name, twitter username, low score rate, worst quality, low quality, bad quality, lowres, pixelated, blurry, compression artifacts, jpeg artifacts, bad anatomy, worst hands, deformed hands, deformed fingers, deformed feet, extra limbs, extra arms, extra legs, extra fingers, fused fingers, missing limbs, wrong hands, twisted hands, abstract, sequence, lineup, 2koma, 4koma, artifacts, adversarial noise, resized, image sample, low aesthetic</danbooru_tags>\n<resolution>low_resolution</resolution>",
+        "baseline_source": "项目已有本地采样设置与负面词；不是最优参数结论，需运行并人工检查基线",
+        "empty_negative_reason": ""
+      },
+      "anima": {
+        "parameters": {
+          "steps": 10,
+          "cfg": 1,
+          "sampler": "euler",
+          "scheduler": "simple",
+          "shift": 3,
+          "cfg_rescale": 0.9,
+          "weight_dtype": "default",
+          "lora_name": null,
+          "lora_strength": 0.75
+        },
+        "negative": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration",
+        "baseline_source": "项目已有本地采样设置与负面词；不是最优参数结论，需运行并人工检查基线",
+        "empty_negative_reason": ""
+      },
+      "illustrious": {
+        "parameters": {
+          "steps": 28,
+          "cfg": 5,
+          "sampler": "dpmpp_2m_sde",
+          "scheduler": "karras",
+          "shift": 0,
+          "cfg_rescale": 0.9,
+          "weight_dtype": null,
+          "lora_name": null,
+          "lora_strength": 0.75
+        },
+        "negative": "worst quality, low quality, bad anatomy, bad hands, extra digits, missing digits, text, watermark, signature, jpeg artifacts",
+        "baseline_source": "项目已有本地采样设置与负面词；不是最优参数结论，需运行并人工检查基线",
+        "empty_negative_reason": ""
+      },
+      "z_image_turbo": {
+        "parameters": {
+          "steps": 9,
+          "cfg": 1,
+          "sampler": "euler",
+          "scheduler": "simple",
+          "shift": 3,
+          "cfg_rescale": 0.9,
+          "weight_dtype": "fp8_e5m2",
+          "lora_name": null,
+          "lora_strength": 0.75
+        },
+        "negative": "blurry, ugly, bad anatomy, bad hands, text, watermark",
+        "baseline_source": "项目已有本地采样设置与负面词；不是最优参数结论，需运行并人工检查基线",
+        "empty_negative_reason": ""
+      }
+    },
+    "phase": "full",
+    "baseline_experiment_id": "",
+    "denoises": [
+      0.15,
+      0.3,
+      0.5
+    ]
+  }
+}

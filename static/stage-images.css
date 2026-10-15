@@ -1,0 +1,18 @@
+#stageImagesDialog{width:min(1500px,94vw);max-width:94vw;max-height:92vh;box-sizing:border-box;background:#111723;color:#e5e9f2;border:1px solid #35435e;border-radius:20px;padding:24px;overflow:auto}
+#stageImagesDialog::backdrop{background:#050810cf}
+#stageImagesDialog>p{color:#aebbd0;max-width:90ch;line-height:1.6}
+#stageImagesDialog .stage-close{float:right}
+#stageImageGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(350px,100%),1fr));gap:20px;margin-top:20px}
+.stage-image-card{min-width:0;border:1px solid #344058;border-radius:12px;padding:16px;background:#0b1019}
+.stage-card-meta{height:100px;overflow:auto;overflow-wrap:anywhere}
+.stage-image-card h3{margin:0 0 8px}.stage-image-card small{display:block;overflow-wrap:anywhere;color:#a4b4cc;font-size:12px}
+.stage-image-card p{font-size:13px;color:#dfc895;line-height:1.5}
+.stage-image-card img{width:100%;height:430px;object-fit:contain;margin:16px 0;background:#080c13}
+.stage-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.stage-actions a{color:#bdd1ff}.stage-actions button{white-space:normal}
+#stageImagesDialog button,#sessionStages,#artworkStages{border:1px solid #596780;border-radius:8px;background:#263248;color:#edf3ff;padding:9px 12px;font:inherit;font-size:13px;cursor:pointer}
+#stageImagesDialog button:hover,#sessionStages:hover,#artworkStages:hover{background:#354764}
+#stageImagesDialog button:disabled{opacity:.6;cursor:wait}
+#stageImagesDialog summary{cursor:pointer;color:#c9d8ef;font-size:13px}
+#sessionStages,#artworkStages{margin:12px 8px 12px 0}
+@media(max-width:700px){#stageImagesDialog{padding:14px}.stage-image-card img{height:350px}}

@@ -1,0 +1,155 @@
+{
+  "schema": "research_project_draft/1",
+  "id": "03_model_handoffs",
+  "name": "模型交接与回退分支",
+  "status": "draft_not_runnable",
+  "purpose": "单模型、16种交接与自主策略对照",
+  "questions": [
+    "像素/文本/参数确实进入目标",
+    "风格收益与语义损失",
+    "旧版本可回退"
+  ],
+  "text_ids": [
+    "t02_poetic",
+    "t03_precise",
+    "t06_new_person",
+    "t07_no_person"
+  ],
+  "reference_set_ids": [
+    "none"
+  ],
+  "method_ids": [
+    "text_baseline"
+  ],
+  "route_ids": [
+    "single_newbie",
+    "single_anima",
+    "single_illustrious",
+    "single_z_image_turbo",
+    "pixel_newbie_to_newbie",
+    "pixel_newbie_to_anima",
+    "pixel_newbie_to_illustrious",
+    "pixel_newbie_to_z_image_turbo",
+    "pixel_anima_to_newbie",
+    "pixel_anima_to_anima",
+    "pixel_anima_to_illustrious",
+    "pixel_anima_to_z_image_turbo",
+    "pixel_illustrious_to_newbie",
+    "pixel_illustrious_to_anima",
+    "pixel_illustrious_to_illustrious",
+    "pixel_illustrious_to_z_image_turbo",
+    "pixel_z_image_turbo_to_newbie",
+    "pixel_z_image_turbo_to_anima",
+    "pixel_z_image_turbo_to_illustrious",
+    "pixel_z_image_turbo_to_z_image_turbo",
+    "autonomous"
+  ],
+  "seeds": [
+    42,
+    3407,
+    123456
+  ],
+  "repetitions_approved": false,
+  "matrix_policy": {
+    "kind": "approved_case_pairs_cross_all_routes_methods_seeds",
+    "dimensions": [
+      "case_id",
+      "method_id",
+      "route_id",
+      "seed"
+    ],
+    "do_not_drop_unsupported_cells": true,
+    "baseline_reuse": "Same text/route/seed/native-config baseline is generated once, linked to all reference-set comparisons; no fake reference use.",
+    "execution_slices": "One approved text across the complete eligible route/method matrix, then extend texts. No silent reduction of routes.",
+    "case_pair_rationale": "Text/reference associations are explicit, avoiding meaningless automatic cross-products. Every associated case retains all route/model combinations; no-image cases use only the no-image control."
+  },
+  "budget": {
+    "launch_approved": false,
+    "max_gpu_jobs": null,
+    "max_wall_seconds": null,
+    "dynamic_max_jobs_per_trial": 6,
+    "dynamic_max_active_seconds_per_trial": 1800,
+    "comparison_policy": "Report both actual cost and results; budget-matched subcomparison repeats fixed controls within the same 6-job ceiling. A 1-job baseline is not mislabeled equal effort."
+  },
+  "approval": {
+    "texts": false,
+    "reference_files": false,
+    "role_bindings": false,
+    "methods": false,
+    "scale_and_runtime": false
+  },
+  "readiness": {
+    "executable": false,
+    "blockers": [
+      "test_texts_not_confirmed",
+      "reference_files_or_not_applicable_not_confirmed",
+      "native_prompts_not_frozen",
+      "method_model_compatibility_not_audited",
+      "execution_budget_not_confirmed"
+    ]
+  },
+  "observations_to_preserve": [
+    "original_text",
+    "compiled_native_prompts_per_stage",
+    "reference_file_sha256",
+    "per_image_role_binding_and_region",
+    "effective_conditions_per_stage",
+    "actual_model_and_sampling",
+    "all_intermediate_artworks",
+    "parent_and_branch_ids",
+    "decision_observation_reason_uncertainty",
+    "actual_tools_and_failures",
+    "time_and_peak_memory",
+    "user_review_original_text"
+  ],
+  "cases": [
+    {
+      "id": "case_01",
+      "text_id": "t02_poetic",
+      "reference_set_id": "none",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline"
+      ]
+    },
+    {
+      "id": "case_02",
+      "text_id": "t03_precise",
+      "reference_set_id": "none",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline"
+      ]
+    },
+    {
+      "id": "case_03",
+      "text_id": "t06_new_person",
+      "reference_set_id": "none",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline"
+      ]
+    },
+    {
+      "id": "case_04",
+      "text_id": "t07_no_person",
+      "reference_set_id": "none",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline"
+      ]
+    }
+  ]
+}

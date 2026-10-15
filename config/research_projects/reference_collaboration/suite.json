@@ -1,0 +1,79 @@
+{
+  "schema": "reference_research_suite/1",
+  "id": "reference_collaboration_20260906",
+  "name": "多模型自主协作与可选多图参考研究",
+  "status": "draft_not_runnable",
+  "goal_paused": true,
+  "auto_start": false,
+  "project_ids": [
+    "01_text_boundaries",
+    "02_character_resources",
+    "03_model_handoffs",
+    "04_autonomous_decisions",
+    "05_style_reference",
+    "06_layout_pose_reference",
+    "07_identity_appearance_reference",
+    "08_multi_reference_routing",
+    "09_conflicts_and_ablations",
+    "10_runtime_and_control"
+  ],
+  "project_files": [
+    "projects/01_text_boundaries.json",
+    "projects/02_character_resources.json",
+    "projects/03_model_handoffs.json",
+    "projects/04_autonomous_decisions.json",
+    "projects/05_style_reference.json",
+    "projects/06_layout_pose_reference.json",
+    "projects/07_identity_appearance_reference.json",
+    "projects/08_multi_reference_routing.json",
+    "projects/09_conflicts_and_ablations.json",
+    "projects/10_runtime_and_control.json"
+  ],
+  "catalog_files": [
+    "texts.json",
+    "reference_sets.json",
+    "reference_assets.json",
+    "routes.json",
+    "methods.json"
+  ],
+  "reference_dimensions": [
+    "style",
+    "composition",
+    "pose",
+    "identity",
+    "appearance",
+    "lighting",
+    "palette",
+    "environment",
+    "objects"
+  ],
+  "selection_contract": {
+    "batch_images": true,
+    "each_image_multiple_roles": true,
+    "each_role_multiple_images": true,
+    "explicit_subject_binding": true,
+    "optional_region_per_binding": true,
+    "unselected_roles": "not_authorized_for_conditioning",
+    "unspecified_role": "ask_or_suggest_do_not_silently_enable",
+    "global_numeric_strength": "not_comparable_across_methods",
+    "default_conflicts": "Explicit user content wins over unselected reference details; contradictions among explicitly requested constraints are surfaced, not silently overwritten."
+  },
+  "review_policy": {
+    "input": "natural_language",
+    "classification_owner": "system",
+    "preserve_original": true,
+    "require_full_review_coverage": false,
+    "machine_judgment_is_user_approval": false
+  },
+  "execution_gate": "These are project definitions, not GenerateRequest manifests. No import to the old job queue, no model downloads or service starts.",
+  "capability_audit": {
+    "status": "not_performed",
+    "rules": [
+      "Audit every method × model × selected-dimension combination.",
+      "Record supported, unsupported, unverified, unavailable_resource separately.",
+      "No silently replacing a missing visual adapter with whole-image img2img.",
+      "Unsupported combinations stay visible in the denominator.",
+      "Autonomous routes have no preassigned model roles or fixed sequence."
+    ]
+  }
+}

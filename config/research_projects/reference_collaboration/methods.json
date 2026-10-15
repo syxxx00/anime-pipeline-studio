@@ -1,0 +1,26 @@
+[
+  {
+    "id": "text_baseline",
+    "name": "不使用参考图的文本基线",
+    "uses_images": false,
+    "status": "baseline_requires_prompt_confirmation"
+  },
+  {
+    "id": "described_reference",
+    "name": "按选择维度提取描述",
+    "uses_images": true,
+    "status": "adapter_and_extractor_to_audit"
+  },
+  {
+    "id": "visual_condition",
+    "name": "按维度传递图像条件",
+    "uses_images": true,
+    "status": "model_compatibility_unverified"
+  },
+  {
+    "id": "combined_reference",
+    "name": "描述与图像条件结合",
+    "uses_images": true,
+    "status": "model_compatibility_unverified"
+  }
+]

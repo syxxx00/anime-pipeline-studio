@@ -1,0 +1,180 @@
+{
+  "schema": "research_project_draft/1",
+  "id": "09_conflicts_and_ablations",
+  "name": "冲突、开关与消融",
+  "status": "draft_not_runnable",
+  "purpose": "参考选择的可靠性",
+  "questions": [
+    "明确冲突是否说明或询问",
+    "关闭单一维度是否确实停止传递",
+    "参考文字不污染输出",
+    "不擅自拼合矛盾身份"
+  ],
+  "text_ids": [
+    "t18_conflict",
+    "t22_literal_style",
+    "t19_text"
+  ],
+  "reference_set_ids": [
+    "layout_only",
+    "style_only",
+    "two_styles",
+    "all_roles"
+  ],
+  "method_ids": [
+    "text_baseline",
+    "described_reference",
+    "visual_condition",
+    "combined_reference"
+  ],
+  "route_ids": [
+    "single_newbie",
+    "single_anima",
+    "single_illustrious",
+    "single_z_image_turbo",
+    "pixel_newbie_to_newbie",
+    "pixel_newbie_to_anima",
+    "pixel_newbie_to_illustrious",
+    "pixel_newbie_to_z_image_turbo",
+    "pixel_anima_to_newbie",
+    "pixel_anima_to_anima",
+    "pixel_anima_to_illustrious",
+    "pixel_anima_to_z_image_turbo",
+    "pixel_illustrious_to_newbie",
+    "pixel_illustrious_to_anima",
+    "pixel_illustrious_to_illustrious",
+    "pixel_illustrious_to_z_image_turbo",
+    "pixel_z_image_turbo_to_newbie",
+    "pixel_z_image_turbo_to_anima",
+    "pixel_z_image_turbo_to_illustrious",
+    "pixel_z_image_turbo_to_z_image_turbo",
+    "autonomous"
+  ],
+  "seeds": [
+    42,
+    3407,
+    123456
+  ],
+  "repetitions_approved": false,
+  "matrix_policy": {
+    "kind": "approved_case_pairs_cross_all_routes_methods_seeds",
+    "dimensions": [
+      "case_id",
+      "method_id",
+      "route_id",
+      "seed"
+    ],
+    "do_not_drop_unsupported_cells": true,
+    "baseline_reuse": "Same text/route/seed/native-config baseline is generated once, linked to all reference-set comparisons; no fake reference use.",
+    "execution_slices": "One approved text across the complete eligible route/method matrix, then extend texts. No silent reduction of routes.",
+    "case_pair_rationale": "Text/reference associations are explicit, avoiding meaningless automatic cross-products. Every associated case retains all route/model combinations; no-image cases use only the no-image control."
+  },
+  "budget": {
+    "launch_approved": false,
+    "max_gpu_jobs": null,
+    "max_wall_seconds": null,
+    "dynamic_max_jobs_per_trial": 6,
+    "dynamic_max_active_seconds_per_trial": 1800,
+    "comparison_policy": "Report both actual cost and results; budget-matched subcomparison repeats fixed controls within the same 6-job ceiling. A 1-job baseline is not mislabeled equal effort."
+  },
+  "approval": {
+    "texts": false,
+    "reference_files": false,
+    "role_bindings": false,
+    "methods": false,
+    "scale_and_runtime": false
+  },
+  "readiness": {
+    "executable": false,
+    "blockers": [
+      "test_texts_not_confirmed",
+      "reference_files_or_not_applicable_not_confirmed",
+      "native_prompts_not_frozen",
+      "method_model_compatibility_not_audited",
+      "execution_budget_not_confirmed"
+    ]
+  },
+  "observations_to_preserve": [
+    "original_text",
+    "compiled_native_prompts_per_stage",
+    "reference_file_sha256",
+    "per_image_role_binding_and_region",
+    "effective_conditions_per_stage",
+    "actual_model_and_sampling",
+    "all_intermediate_artworks",
+    "parent_and_branch_ids",
+    "decision_observation_reason_uncertainty",
+    "actual_tools_and_failures",
+    "time_and_peak_memory",
+    "user_review_original_text"
+  ],
+  "supplemental_cases": [
+    "role_toggle_off_each_dimension",
+    "explicit_text_vs_reference_conflict",
+    "two_contradictory_identity_refs",
+    "crop_excludes_unselected_face",
+    "reference_contains_instruction_like_text"
+  ],
+  "cases": [
+    {
+      "id": "case_01",
+      "text_id": "t18_conflict",
+      "reference_set_id": "layout_only",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline",
+        "described_reference",
+        "visual_condition",
+        "combined_reference"
+      ]
+    },
+    {
+      "id": "case_02",
+      "text_id": "t22_literal_style",
+      "reference_set_id": "style_only",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline",
+        "described_reference",
+        "visual_condition",
+        "combined_reference"
+      ]
+    },
+    {
+      "id": "case_03",
+      "text_id": "t22_literal_style",
+      "reference_set_id": "two_styles",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline",
+        "described_reference",
+        "visual_condition",
+        "combined_reference"
+      ]
+    },
+    {
+      "id": "case_04",
+      "text_id": "t19_text",
+      "reference_set_id": "all_roles",
+      "approved": false,
+      "asset_bindings_confirmed": false,
+      "expected_identity": null,
+      "asset_assignment_scope": "case_specific; reference slots are roles, not one globally shared character photo",
+      "method_ids": [
+        "text_baseline",
+        "described_reference",
+        "visual_condition",
+        "combined_reference"
+      ]
+    }
+  ]
+}

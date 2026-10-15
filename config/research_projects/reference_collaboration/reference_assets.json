@@ -1,0 +1,134 @@
+[
+  {
+    "id": "style_a",
+    "name": "画风参考A",
+    "requirements": "清晰线条/平涂等候选；实际画风由用户选图，不由占位名称证明",
+    "suggested_roles": [
+      "style"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "style_b",
+    "name": "画风参考B",
+    "requirements": "与A明显不同的另一种绘制方式",
+    "suggested_roles": [
+      "style"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "layout_a",
+    "name": "构图参考A",
+    "requirements": "主体位置和镜头关系明确",
+    "suggested_roles": [
+      "composition"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "pose_a",
+    "name": "姿态参考A",
+    "requirements": "身体和手势清楚；不据此推断身份",
+    "suggested_roles": [
+      "pose"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "person_a",
+    "name": "人物参考A",
+    "requirements": "可辨认身份；注明角色、版本及来源",
+    "suggested_roles": [
+      "identity"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "person_a_second",
+    "name": "人物A的另一张图",
+    "requirements": "同一身份但不同姿态/角度；需人工确认同一身份",
+    "suggested_roles": [
+      "identity"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "person_b",
+    "name": "人物参考B",
+    "requirements": "与A不同身份；多人物绑定用",
+    "suggested_roles": [
+      "identity"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "outfit_a",
+    "name": "外观参考A",
+    "requirements": "服装/皮肤清楚；与身份分开绑定",
+    "suggested_roles": [
+      "appearance"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "scene_a",
+    "name": "环境参考A",
+    "requirements": "空间/材质/道具清楚",
+    "suggested_roles": [
+      "environment",
+      "objects"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  },
+  {
+    "id": "light_a",
+    "name": "光照/色彩参考A",
+    "requirements": "颜色与光照可以分别启用",
+    "suggested_roles": [
+      "lighting",
+      "palette"
+    ],
+    "file_path": null,
+    "sha256": null,
+    "source": null,
+    "identity_claim": null,
+    "approved": false
+  }
+]

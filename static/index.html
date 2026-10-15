@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Pipeline Studio · 本地创作</title><link rel="stylesheet" href="/assets/studio.css?v=20261012-daily-flow"><link rel="stylesheet" href="/assets/research.css?v=20260905"><link rel="stylesheet" href="/assets/pipeline-diagram.css?v=20260905"><link rel="stylesheet" href="/assets/creation-controls.css?v=20260905"></head>
+<body>
+<header class="app-bar"><a class="identity" href="/" aria-label="Pipeline Studio 首页"><b>✦</b><span>Pipeline <strong>Studio</strong></span></a><nav aria-label="主导航"><button class="active" data-view="create">创作台</button><button data-view="library">作品</button><button data-view="research">研究</button><a href="/iteration">迭代试跑 ↗</a><a href="/pipeline">管线图 ↗</a><a href="/models">模型接入</a></nav><div class="engine" id="engine" role="status"><i></i><span>连接中</span></div></header>
+<main>
+<section class="view active" id="createView">
+  <header class="workspace-head"><div><h1>创作台</h1><p id="modeSummary">从一句描述开始，参数交给默认配置。</p></div><div class="workspace-actions"><button id="openCreativeHistory" type="button">创作记录</button><button id="openPromptReview" disabled>审阅提示词</button><label class="pro-switch"><input id="proMode" type="checkbox"><span>专业模式</span></label></div></header>
+  <div class="workbench" id="workbench">
+    <div class="creative-area">
+      <section class="canvas-stage" aria-label="当前画面与任务进度">
+        <div class="canvas-label"><span>当前画面</span><span>本地运行</span></div>
+        <div class="session-empty" id="sessionEmpty"><span class="empty-symbol" aria-hidden="true">✦</span><h2>把想象留在画面里</h2><p>写下角色、场景，或只是一个瞬间。<br>生成进度和结果都会出现在这里。</p><button data-view="library">浏览已有作品 ↗</button></div>
+        <div class="session-live hidden" id="sessionLive" aria-live="polite"><div class="session-top"><span id="sessionStage">构思画面</span><b id="sessionPercent"></b></div><div class="meter"><i id="sessionMeter"></i></div><p id="sessionDetail"></p><button id="cancelPreparation" class="hidden" type="button">取消这次准备</button><div class="stage-list" id="stageList"><span>构思</span><span>准备条件</span><span>生成</span><span>检查</span><span>保存</span></div><div id="jobReceiptControls" class="hidden"><button id="inspectJobReceipt" type="button" disabled>核对原图像任务</button><button id="cancelJobReceipt" type="button" disabled>停止原图像任务</button><p>只核对或停止当前记录的原任务，不接旧图、不重派；终态不代表作品成功。</p></div><p id="jobReceiptFeedback" class="hidden" role="status"></p><article class="session-result hidden" id="sessionResult"><img id="sessionImage" alt="当前生成结果"><div><strong>作品已保存</strong><small id="sessionFile"></small><button id="openSessionArtwork">评价 / 局部修改 ↗</button></div></article></div>
+      </section>
+      <section id="creativeSessionPanel" class="creative-session-panel" hidden aria-label="同一任务的候选与操作">
+        <header><div><h2>创作任务</h2><small id="creativeTaskId"></small></div><div class="creative-session-actions"><button id="creativeReview" type="button" disabled>查看方案与原生条件</button><button id="creativeRefresh" type="button">重新读取</button><button id="creativeCompleteComparison" data-creative-action="complete_comparison" type="button" hidden disabled>补完本次比较</button><button id="creativeInspectJob" type="button" hidden disabled>核对原图像任务</button><button data-creative-action="pause" type="button">暂停</button><button data-creative-action="resume" type="button" title="继续原回合，不增加预算">继续本回合</button><button data-creative-action="stop" type="button">停止</button></div></header>
+        <p id="creativeConnection" class="creative-connection" role="status"></p><p id="creativeReceiptFeedback" role="status" hidden></p><p id="creativeBudget" class="creative-budget"></p>
+        <p id="creativeComparisonCompletionNote" hidden role="status"></p>
+        <p id="creativeSupportLimit" class="message" hidden role="status"></p>
+        <details id="creativeSupportMaterials" hidden><summary>查看实际视觉支撑（非成品）</summary><div id="creativeMaterialImages" class="creative-material-images"></div></details>
+        <div id="creativeAwaiting" hidden><p>这是系统补充的可纠正方案，不是成品或已核验的理解。可先查看并修改目标模型的完整正负条件。</p><button class="make" id="creativeGenerate" type="button">采用当前条件，生成候选</button></div>
+        <div id="creativeCandidates" class="creative-candidates"></div><button data-creative-action="regenerate" type="button">在本任务内重新生成</button>
+      </section>
+      <section class="composer" aria-label="描述与生成"><label class="composer-label" for="intent">你想画什么？<span>自然语言即可</span></label><textarea id="intent" rows="3" placeholder="幽灵鲨坐在黄昏的礁石上，像一座安静的雕塑。云层酝酿着风暴，海风却很轻快。"></textarea>
+        <p id="composerContextNote" class="composer-context-note" hidden></p>
+        <div class="composer-bottom"><div class="intent-options"><label>画面形式<select id="styleMode"><option value="standard_anime">标准动漫</option><option value="chibi">Q 版</option><option value="poster">游戏海报</option></select></label><label>风格配方<select id="stylePreset"><option value="">由描述决定，不追加配方</option></select></label><label>输出<select id="quality"><option value="high">高细节</option><option value="standard" selected>标准</option><option value="iteration_base" disabled>单张 · 无附加细化</option></select></label><label>生成方式<select id="generationStrategy"><option value="creative">创作任务 · 默认</option><option value="single" disabled>单路线 · 专业兼容入口</option><option value="local_iteration">按结果逐步创作 · 试用</option><option value="cooperative" disabled>多候选协作 · 专业设置</option></select></label></div><button class="make" id="make">生成画面 <span>↗</span></button></div>
+        <div id="localIterationSettingsNote" class="iteration-notice hidden"><p>试用 · 最多 3 次生图 / 30 分钟。不预设固定模型链，不认证画面质量。</p><p>适用：单张，不附加高清或脸部细化；不会自动降级。</p><details id="localIterationDetails"><summary>适用设置与迭代过程</summary><p>本地模型读取当前概念、完整原句与真实图像，再提出下一操作。最多 8 次提案，可查看、评价或暂停。普通模式请明确选择“单张 · 无附加细化”（迭代基础输出）：尺寸、步数、CFG、Seed 等完整参数仍保留。专业模式也可自己关闭附加细化。不适用的设置会明确停止；改变实际输出配置后需重新准备。</p></details></div>
+        <div class="message hidden" id="createMessage" role="status"></div>
+        <details id="preparationHistory" class="preparation-history" hidden><summary id="preparationHistorySummary">上次兼容准备</summary><p>只读查看原记录，不会重跑。原始输入、设置和错误仍完整保留。</p><p id="preparationHistoryOriginal"></p><pre id="preparationHistoryDetail"></pre><a id="preparationHistoryLink" target="_blank" rel="noreferrer">查看完整原记录 ↗</a></details>
+        <section id="sourceReview" class="source-review" hidden aria-labelledby="sourceReviewTitle">
+          <h3 id="sourceReviewTitle">先核对系统的理解</h3>
+          <p>这是待采用的解释，不是已核定的要求。采用后只继续构思，不会直接生成图片。</p>
+          <div data-source-comparison class="source-comparison"></div>
+          <label for="sourceClarification">哪一处理解错了？<textarea id="sourceClarification" rows="3" maxlength="4000" placeholder="例如：我说的是她现在看着石头，不是正在雕刻；过去的爱好是缘由，不是要画过去。"></textarea></label>
+          <p>这里纠正对原句的理解；新增画面要求或更换角色资源，请修改上方输入后重新准备。</p>
+          <div class="source-actions"><button id="clarifySource" data-source-clarify type="button">按我的纠正重新理解</button><button id="adoptSource" data-source-adopt type="button">采用这份解释，继续构思</button></div>
+          <p id="sourceReviewStatus" role="status"></p>
+        </section>
+      </section>
+    </div>
+    <aside id="professionalPanel" class="professional-panel hidden" aria-label="专业创作设置">
+      <header><h2>创作设置</h2><button id="resetSettings" title="恢复默认参数">重置</button></header><p class="inspector-note">与普通模式共用配置。这里选择自己的参数。</p>
+      <section class="setting-section"><h3>模型与路线</h3><p id="cooperativeSettingsNote" class="hidden">现有方案：NewBie、Anima、Illustrious 各一张，再用 Illustrious 原图生成 NewBie 候选。以下路线仅向匹配模型提供参数，其余使用各自预设。候选固定单张、基础尺寸、启用检查，不执行高清或脸部细化。不是自动寻找最优组合。</p><label>执行路线 / 参数来源<select id="pipelineChoice"></select></label><p id="configSummary">正在读取当前配置…</p></section>
+      <section class="setting-section" id="creativePictureSettings"><h3>画面组织</h3><label for="creative-picture-authoring-method">构思方式<select id="creative-picture-authoring-method"><option value="prose" selected>完整画面描述（默认）</option><option value="whole">结构化画面选择</option><option value="relational_steps">分段关系构思</option></select></label><p id="creativePictureSettingsNote">仅用于下一次新建创作；普通与专业模式默认使用完整画面描述，查看历史不会改变新任务默认。</p><label for="creative-authoring-profile">理解与构思模型<select id="creative-authoring-profile"><option value="local_4b" selected>本地 4B（默认）</option><option value="local_7b_bounded">本地 7B（受限日常配置）</option></select></label><p id="creativeAuthoringProfileNote">仅用于下一次新建创作。普通模式保持 4B 默认；7B 的效果仍需实际作品验证。</p></section>
+      <details class="setting-section" id="resourceSettings"><summary>角色与参考资源</summary><label>知识库<select id="knowledgePack"><option value="">不使用知识库</option></select></label><div class="knowledge-picker hidden" id="knowledgePicker"><label>角色<select id="operator"></select></label><label>外观<select id="appearance"></select></label><a id="knowledgeSource" target="_blank" rel="noreferrer">核验来源 ↗</a></div><p id="knowledgeNote">不使用知识库，仍可创作任意角色。</p><label>当前模型 LoRA<select id="loraChoice"><option value="">不加载 LoRA</option></select></label><div id="loraStrengthSlot"></div><p id="loraNote"></p></details>
+      <details class="setting-section" id="samplingSettings"><summary>采样参数</summary><label>Seed（留空随机）<input id="seedChoice" type="number" min="0" max="9007199254740991" step="1"></label><div class="settings-grid"><label>采样器<select id="samplerChoice"></select></label><label>调度器<select id="schedulerChoice"></select></label></div><div id="samplingFields"></div></details>
+      <details class="setting-section" id="creativeCycleSettings"><summary>结果回合与预算</summary>
+        <label class="setting-check"><input id="creativeResultGuided" type="checkbox" checked>根据实际图片继续调整</label>
+        <div class="settings-grid"><label>至多候选数<input id="creativeMaxJobs" type="number" min="1" max="6" step="1" value="6"></label><label>至多模型调用数<input id="creativeMaxCalls" type="number" min="1" max="8" step="1" value="8"></label></div>
+        <p>只是预算上限，系统可更早停止；不是必须跑满，也不承诺画面合格。普通模式同样默认开启，使用 6 / 8 上限。</p>
+        <p id="creativeCycleSettingsNote">仅约束下一次新建创作，不修改正在查看的任务。暂停或停止请使用任务区的操作。</p>
+      </details>
+      <div id="parameterGroups"></div>
+      <div id="bridgeSettings"><details class="setting-section"><summary>分阶段风格</summary><p>默认继承整体配方。单独覆盖只影响对应阶段；不追加不等于删除原提示词画风。</p><label>源阶段<select id="sourceStyle"></select></label><label>后续 NewBie 阶段<select id="finalStyle"></select></label></details></div>
+      <p class="inspector-note">关闭专业模式会采用默认参数，已填设置仍保留。</p>
+    </aside>
+  </div>
+</section>
+<section class="view" id="libraryView"><header class="page-head"><div><h1>作品</h1><p>找回喜欢的画面，留下评价，或从这里继续修改。</p></div><button id="reloadArtworks">刷新</button></header><div class="library-filters"><label>搜索编号、描述、路径或评价<input id="artSearch" type="search" maxlength="1000" placeholder="例如：幽灵鲨、手部、f17e29aa90fe"></label><label>作品来源<select id="artOrigin"><option value="creation">创作与修改</option><option value="experiment">实验产物</option><option value="">全部作品</option></select></label></div><p id="libraryStatus" role="status"></p><section class="library"><div class="art-grid" id="artGrid"><p class="empty-copy">正在读取作品…</p></div><button id="moreArtworks" class="hidden">加载更多作品</button></section></section>
+<section class="view" id="researchView">
+  <header class="research-head"><div><h1>研究</h1><p>控制实验，比较结果，留下你的判断。</p></div><label>当前实验<select id="experimentSelect"><option value="">读取实验…</option></select></label></header>
+  <div class="study-summary"><strong id="studyName">选择实验</strong><span id="studyMeta">实验数据在后台加载。</span></div>
+  <nav class="research-tabs" aria-label="研究工作区"><button class="active" data-lab="run">进度与结果</button><button data-lab="analysis">评价与分析</button><button data-lab="design">实验设计</button></nav>
+  <div class="research-facts"><span>矩阵设计 <b id="boundaryCount">—</b></span><span>检查能力 <b id="checkHeadline">读取中</b></span></div>
+  <div class="lab" id="designLab">
+  <section class="controlled-studies" aria-label="问题驱动的非参考图实验">
+    <header><div><span class="overline">CONTROLLED STUDIES</span><h2>模型与管线：按问题做对照</h2></div><button id="reloadStudies">重新读取项目</button></header>
+    <p id="studiesLoadStatus" role="status">正在读取研究项目…</p><div id="controlledStudyCards" class="study-cards"></div>
+    <section id="studyEditor" hidden><h3 id="studyEditorTitle"></h3><p id="studyQuestion"></p><p id="studyControls"></p><p id="studyLimits"></p><details><summary>完整实验设计 JSON（备份、导入更多场景）</summary><textarea id="studyDesignJson" spellcheck="false" aria-label="完整实验设计 JSON"></textarea><button id="exportStudyDesign">将当前设计填入 JSON</button><button id="importStudyDesign">从 JSON 载入设计</button></details><div id="studyCases"></div>
+      <div id="studyExecution"><div id="studyModels"></div><div class="study-axis-controls"><label>Seed（逗号分隔，最多32个；完整任务上限1000项）<input id="studySeeds"></label><label>宽<input id="studyWidth" type="number" min="512" max="1536" step="16"></label><label>高<input id="studyHeight" type="number" min="512" max="1536" step="16"></label><label id="studyDenoisesLabel">单跳强度对照（逗号分隔）<input id="studyDenoises"></label></div>
+        <fieldset id="studyLoopControls" hidden><legend>循环路线与参数</legend><div class="study-axis-controls"><label>填入路线预设<select id="studyLoopPreset"><option value="pairs">双模型回访 + 连续目标对照（默认）</option><option value="triples">三模型轮换 + 回访对照</option><option value="custom">自定义路线</option></select></label></div><label>每个目标模型的重绘强度（JSON）<textarea id="studyLoopDenoises" rows="5" spellcheck="false"></textarea></label><p>这是候选参数，不是最优或等效强度。NewBie 默认 0.15，其他模型 0.30。此处每个数实际作用于该模型的所有交接；源图生成仍使用上方模型设置。</p><details><summary>全部路线（可编辑 JSON，每条 2–4 个模型）</summary><textarea id="studyLoopRoutes" rows="12" spellcheck="false"></textarea></details><p>每一步保留同一场景要求及目标模型原生文本。按轮次推进全部场景；创建后暂停。共用中间版本不是独立样本，相同交接次数不代表相同耗时。</p></fieldset>
+        <p id="studyScope" role="status"></p><div class="study-axis-controls"><label>本次创建内容<select id="studyPhase"><option value="full">完整矩阵（默认）：全部条件、方向与 Seed</option><option value="baseline">仅校验配置：全部模型/场景，首个 Seed</option></select></label><label>复用已有基线（跨实验类型）<select id="studyBaseline"><option value="">预览时自动查找匹配基线</option></select></label></div><p id="studyBaselineNote" role="status"></p><button id="restoreBaselineDesign">采用所选基线的配置（保留当前实验类型）</button><label><input id="studyBaselineReviewed" type="checkbox">我已查看所选基线的图片，确认配置能正常出图（不是认可所有图片质量）</label><p>相同配置的基线可跨三组实验复用，无需各跑一次。无匹配基线时会明确提示，不会自动退回基线阶段。新配置或模型文件发生变化，需要重新校验。</p>
+        <button id="previewStudy">预览实际文本与数量</button><p id="studyPreviewNote"></p><div id="studyPreview"></div>
+        <div class="study-actions"><label><input id="studyConfirmed" type="checkbox">已审阅实际文本、对照方式和数量</label><button id="createStudy" disabled>创建为暂停实验</button></div>
+      </div><p id="studyStatus" role="status"></p>
+    </section>
+  </section>
+  <details class="legacy-study"><summary>旧矩阵设计（保留历史，不作为新实验默认）</summary><section class="lab-sheet"><header><div><span class="overline">COMPREHENSIVE MATRIX</span><h2>全面模型与管线边界矩阵</h2></div><strong id="boundaryBadge">—</strong></header><p id="boundarySummary">正在读取测试设计…</p><details><summary>检查全部测试文本</summary><div class="text-cases" id="boundaryTexts"></div></details><label class="confirm"><input id="confirmBoundary" type="checkbox">我已检查文本、路线和测试数量</label><button class="make" id="createBoundary" disabled>创建为暂停实验 <i>→</i></button></section></details><details class="manifest-box"><summary>创建自定义实验</summary><p>直接导入包含完整请求的实验清单；新实验保持暂停。</p><textarea id="manifest" placeholder='{"name":"自定义边界实验","items":[...]}'></textarea><button id="importManifest">校验并创建</button></details></div>
+  <div class="lab" id="runLab"><section class="run-console"><header><div><span class="overline">EXPERIMENT CONTROL</span><h2 id="runName">选择一个实验</h2></div><div class="run-actions"><button data-action="resume">继续</button><button data-action="pause">暂停</button><button data-action="retry-failed">重试失败</button><button class="danger" data-action="interrupt">中断当前项</button></div></header><div class="run-metrics"><article><span>状态</span><strong id="runState">—</strong></article><article><span>完成</span><strong id="runProgress">—</strong></article><article><span>预计剩余</span><strong id="runEta">—</strong></article><article><span>评价</span><strong id="runReviews">—</strong></article></div><div class="meter dark"><i id="runMeter"></i></div><div class="result-filters"><label>搜索编号、描述、文件<input id="filter-query" type="search"></label><label>状态<select id="filter-status"><option value="">全部</option><option value="pending">待运行</option><option value="running">运行中</option><option value="completed">完成</option><option value="failed">失败</option><option value="cancelled">已跳过</option></select></label><label>角色<select id="filter-character"><option value="">全部</option></select></label><label>管线<select id="filter-pipeline"><option value="">全部</option></select></label><label>场景<select id="filter-scene"><option value="">全部</option></select></label><label>Seed<select id="filter-seed"><option value="">全部</option></select></label></div><div class="result-navigation"><span id="resultCount"></span><button id="previousResults">上一页</button><button id="nextResults">下一页</button><button id="reloadResults">刷新状态</button><button id="openComparison" disabled>并排对比（0/4）</button></div><p id="researchConnection" role="status"></p><div class="result-grid" id="resultGrid"><p class="empty-copy">选择实验后显示结果。</p></div></section></div>
+  <div class="lab" id="analysisLab"><section class="analysis-sheet"><header><div><span class="overline">HUMAN + CHECK</span><h2>评价与模型边界</h2></div><button id="refreshAnalysis">重新聚合</button></header><div class="capability" id="capability"></div><div class="analysis-summary" id="analysisSummary">选择实验后开始聚合。</div><div class="analysis-groups" id="analysisGroups"></div><section class="analysis-review-section"><h3>你的评价原文</h3><div id="analysisReviews"></div></section></section></div>
+</section>
+</main>
+<dialog id="creativeReviewDialog" class="creative-review-dialog" aria-labelledby="creativeReviewTitle">
+  <header class="dialog-head"><div><span class="overline">当前创作任务 · 未执行不算成品</span><h2 id="creativeReviewTitle">方案与实际模型条件</h2></div><button data-close="creativeReviewDialog" aria-label="关闭方案审阅">✕</button></header>
+  <div class="creative-review-body"><details><summary>完整原句（不会被方案替换）</summary><blockquote id="creativeOriginal"></blockquote></details><details id="creativeRequestUnderstanding"><summary>原句理解与出处（未认证）</summary><p id="creativeRequestUnderstandingNotice"></p><pre id="creativeRequestUnderstandingDetails"></pre></details><p id="creativePictureMethod"></p><h3>系统补充的画面方案</h3><p id="creativePlanText"></p><p id="creativePlanLogic"></p><details><summary>完整构思原件与方案细节</summary><pre id="creativePlanDetails"></pre></details>
+    <h3>实际目标：<span id="creativeNativeTarget"></span></h3><p id="creativeNativeUnavailable" hidden>该目标的原生条件尚未准备好，不能把空文本视为可生成条件。</p>
+    <div class="contract-grid"><label>正向条件 / XML<textarea id="creativePositive" spellcheck="false" aria-label="创作任务正向条件"></textarea></label><label>负面条件<textarea id="creativeNegative" spellcheck="false" aria-label="创作任务负面条件"></textarea></label></div><p id="creativeNativeNotice" role="status"></p>
+    <details><summary>条件来源与编译记录</summary><pre id="creativeConditionProvenance"></pre></details>
+    <footer><label id="creativePrepareNativeBudget" hidden>本次准备的模型调用总上限<input id="creativePrepareNativeMaxCalls" type="number" min="1" max="8" step="1" aria-label="本次准备的模型调用总上限"><small id="creativePrepareNativeBudgetNote"></small></label><button class="make" id="creativeReviewGenerate" type="button">确认当前条件，生成候选</button></footer>
+  </div>
+</dialog>
+<dialog id="promptDialog" class="prompt-dialog" aria-labelledby="promptTitle">
+  <header class="dialog-head"><div><span class="overline">生成前审阅</span><h2 id="promptTitle">把意图交给模型之前</h2></div><button data-close="promptDialog" aria-label="关闭提示词审阅">✕</button></header>
+  <section class="contract hidden" id="contractPanel">
+    <p class="prompt-hint">这是可修改的作者提案，不是已经理解正确或自主规划的证明。提案与规格修改后需重建条件；手改原生词不会自动验证旧场景说明。已选配方会注入完整画风条件，手写画风时可选择“不追加配方”。</p>
+    <details class="review-notes"><summary>解析提醒与需要确认的内容</summary><div id="professionalQuestions"></div><p id="compileWarnings"></p></details>
+    <nav class="prompt-tabs" aria-label="提示词编辑内容"><button class="active" data-prompt-tab="author">创作提案</button><button data-prompt-tab="newbie">NewBie XML</button><button data-prompt-tab="spec">语义规格</button><button data-prompt-tab="native">其他模型格式</button></nav>
+    <div class="prompt-pane active" id="authorPromptPane"><p>以下补充是本次构思的选择，可以改，不会替换你的原句。完成准备也不代表已经执行生图。</p><details><summary>完整原句</summary><blockquote id="authorOriginal"></blockquote></details><label>画面提案（英文模型条件）<textarea id="authorNarrative" maxlength="5000" spellcheck="false"></textarea></label><label>表现选择及理由<textarea id="authorLogic" maxlength="2500"></textarea></label><details id="authorLayoutGroup" hidden><summary>关系怎样呈现 · 可编辑布局方案</summary><p>这些英文方案参与实际生成条件；修改规格时请同时审阅。保留原方案、改写或清空均可，不会改动你的原句。</p><textarea id="authorLayout" aria-label="布局方案 JSON 数组" spellcheck="false"></textarea></details><details><summary>空间安排 · 高级 JSON</summary><textarea id="authorPositions" spellcheck="false"></textarea></details><p id="authorStatus" role="status"></p></div>
+    <div class="prompt-pane" id="newbiePromptPane"><div class="contract-grid"><label>正向 XML<textarea id="contractXml" spellcheck="false"></textarea></label><label>排除项<textarea id="contractNegative" spellcheck="false"></textarea></label></div></div>
+    <div class="prompt-pane" id="specPromptPane"><label>可编辑语义规格<textarea id="contractJson" spellcheck="false"></textarea></label></div>
+    <div class="prompt-pane" id="nativePromptPane"><div id="nativeEditors"></div></div>
+    <div class="message hidden" id="promptMessage" role="status"></div>
+    <footer class="contract-actions"><button id="rebuildContract">用提案与规格重建条件</button><button id="previewGraph">预览本次管线</button><button class="make" id="confirmMake">确认并生成 ↗</button></footer>
+  </section>
+</dialog>
+<dialog id="creativeHistoryDialog" class="creative-history-dialog" aria-labelledby="creativeHistoryTitle">
+  <header class="dialog-head"><div><span class="overline">CREATION HISTORY</span><h2 id="creativeHistoryTitle">创作记录</h2></div><button type="button" data-close="creativeHistoryDialog" aria-label="关闭创作记录">×</button></header>
+  <div class="creative-history-body"><p>打开记录只切换查看，不会恢复、重跑或停止任何任务。正在运行的任务仍按原状态继续。</p><div class="creative-history-controls"><label>读取范围<select id="creativeHistoryLimit"><option value="20">最近 20 条</option><option value="100">最近 100 条</option></select></label><button id="creativeHistoryRefresh" type="button">重新读取</button></div><p id="creativeHistoryStatus" role="status"></p><div id="creativeHistoryList"></div><details class="legacy-history"><summary>旧协作记录 · 兼容入口</summary><p>这是此前的多候选协作任务，不是上面的普通创作记录。只查看，不会自动恢复执行。</p><div id="legacyHistoryEntry"></div></details></div>
+</dialog>
+<dialog id="artDialog" class="art-dialog" aria-labelledby="artTitle">
+  <button class="dialog-close" data-close="artDialog" aria-label="关闭作品">×</button>
+  <div class="artwork-layout">
+    <div class="artwork-image">
+      <details id="artVersionCompare" hidden><summary>对比直接来源版本</summary><p>两张原图并列查看，不表示新版本更好。需要时可在版本列表打开旧版，再明确选用或回到它。</p><div id="artVersionImages" class="artwork-version-images"></div></details>
+      <img id="artImage" alt="作品"><small id="artPath"></small>
+      <div class="artwork-file-actions"><a id="artOriginal" download>下载原图</a><button id="artRefresh" type="button">重新读取这张图</button></div>
+      <section class="artwork-versions" aria-label="作品版本"><h3>版本</h3><div class="lineage" id="lineage"></div></section>
+    </div>
+    <div class="artwork-tools">
+      <span class="overline">WORK ON THIS IMAGE</span><h2 id="artTitle">作品</h2>
+      <p id="artContext" class="artwork-context" role="status">正在核对作品上下文</p>
+      <div id="artTaskActions" class="artwork-task-actions" hidden><button id="artOpenTask" type="button" disabled>查看所属创作</button><button id="artSelectVersion" type="button" disabled>选用此版本</button><button id="artRevertVersion" type="button" disabled>回到此版本</button></div>
+      <p id="artPrompt"></p>
+      <nav aria-label="当前作品操作"><button class="active" data-tool="review">评价与继续</button><button data-tool="repair">圈选修改</button><button data-tool="text">精确文字</button><button data-tool="evidence">工作流与记录</button></nav>
+      <section class="tool active" id="reviewTool"><div id="reviews"></div><textarea id="reviewText" placeholder="直接说哪里好、哪里不好，以及希望怎样调整。系统负责分类。"></textarea><div class="creative-feedback-actions"><button class="make" id="saveReview">只保存评价</button><button id="continueReview" type="button" disabled>按这段反馈继续</button></div><p id="continueReviewNote">正在核对关联创作任务；旧作品仍可评价与圈选修改。</p></section>
+      <section class="tool" id="repairTool"><p>涂抹要修改的区域，再用自然语言说明要求。提交会创建待比较的新版本，不覆盖当前原图。</p><div class="mask-wrap"><canvas id="imageCanvas"></canvas><canvas id="maskCanvas"></canvas></div><p id="repairSessionNote" role="status">打开作品后核对所属创作任务。</p><label>修改要求<textarea id="repairInstruction" maxlength="4000" placeholder="补全右手缺少的轮廓线，保持服装、姿势和光照不变"></textarea></label><div class="repair-parameters"><label>局部修改步数<input id="repairSteps" type="number" min="5" max="40" step="1" value="18"></label><label>局部重绘强度 <output id="repairDenoiseValue">0.42</output><input id="repairDenoise" type="range" min="15" max="75" value="42" aria-label="局部重绘强度"></label></div><button id="clearMask">清空圈选</button><button class="make" id="submitRepair">创建圈改版本</button></section>
+      <section class="tool" id="textTool"><label>精确内容<textarea id="exactText"></textarea></label><div class="text-controls"><label>横向<input id="textX" type="number" min="0" max="1" step=".01" value=".5"></label><label>纵向<input id="textY" type="number" min="0" max="1" step=".01" value=".85"></label><label>字号<input id="fontSize" type="number" value="72"></label></div><button class="make" id="submitText">生成文字版本</button></section>
+      <section class="tool" id="evidenceTool"><button id="loadWorkflow">读取实际工作流</button><div id="evidence">尚未读取。</div></section><div class="message hidden" id="artMessage"></div>
+    </div>
+  </div>
+</dialog>
+<dialog id="graphDialog" class="graph-dialog"><button class="dialog-close" data-close="graphDialog">×</button><span class="overline">PIPELINE PREVIEW</span><h2>当前方案的执行预览</h2><p>尚未派发生成；这里展示当前条件预计使用的结构，不是已完成的工作流。</p><div id="graphContent"></div></dialog>
+<script src="/assets/request-state.js?v=4" defer></script>
+<script src="/assets/job-watcher.js?v=1" defer></script>
+<script src="/assets/creation-config.js?v=20261014-cooperation-highres" defer></script>
+<script src="/assets/author-preparation.js?v=20261011-source-review" defer></script>
+<script src="/assets/source-review.js?v=20261011" defer></script>
+<script src="/assets/creation-controls.js?v=20261014-cooperation-highres" defer></script>
+<dialog id="comparisonDialog"><button id="closeComparison">关闭对比</button><h2>选中样本对比</h2><p>可在每张图下直接保存自然语言评价。放大查看时保持完整画面。</p><div id="comparisonGrid"></div></dialog>
+<script src="/assets/research-results.js?v=20260921" defer></script>
+<script src="/assets/pipeline-diagram.js?v=1" defer></script>
+<script src="/assets/creative-session.js?v=20261014-core-use-lockfix" defer></script>
+<script src="/assets/studio.js?v=20261014-core-use-lockfix" defer></script>
+<link rel="stylesheet" href="/assets/stage-images.css?v=1">
+<script src="/assets/stage-images.js?v=1" defer></script>
+<script src="/assets/research-ui.js?v=20260921" defer></script>
+<link rel="stylesheet" href="/assets/controlled-studies.css?v=20260913">
+<script src="/assets/controlled-studies.js?v=20260921" defer></script>
+<link rel="stylesheet" href="/assets/cooperative-ui.css?v=1">
+<script src="/assets/cooperative-ui.js?v=20261001-run-link" defer></script></body></html>

@@ -1,0 +1,17 @@
+{
+  "w_detonator": {"requires_objects": true, "requires_relations": true},
+  "w_ruins_storm": {},
+  "w_minimal": {},
+  "specter_reef_poetic": {},
+  "specter_weapon": {"requires_objects": true, "requires_relations": true},
+  "specter_underwater_memory": {"requires_objects": true, "requires_relations": true},
+  "amiya_documents": {"requires_objects": true, "requires_relations": true, "text_intent": "forbidden"},
+  "amiya_arts": {"requires_relations": true},
+  "amiya_crowd": {"requires_objects": true, "requires_relations": true},
+  "kangel_stream": {"requires_objects": true, "requires_relations": true, "text_intent": "decorative_ui"},
+  "kangel_stage": {},
+  "kangel_chibi": {"requires_objects": true, "requires_relations": true, "text_intent": "forbidden"},
+  "misaka_railgun": {"requires_objects": true, "requires_relations": true},
+  "misaka_vending_machine": {"requires_objects": true, "requires_relations": true, "text_intent": "forbidden"},
+  "misaka_minimal_summer": {}
+}

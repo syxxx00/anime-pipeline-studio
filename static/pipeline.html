@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+  <title>管线图 · Pipeline Studio</title>
+  <link rel="stylesheet" href="/assets/studio.css?v=20260905">
+  <link rel="stylesheet" href="/assets/pipeline-diagram.css?v=20260905">
+  <style>
+    .pipeline-page{padding-top:24px}.pipeline-head{display:flex;justify-content:space-between;align-items:start;gap:20px;margin-bottom:24px}.pipeline-head p{color:var(--muted);font-size:13px;margin-top:6px}.readonly-label{border:1px solid var(--line);padding:7px 12px;border-radius:8px;color:var(--muted);font-size:12px;white-space:nowrap}.sources{display:flex;gap:14px;align-items:end;flex-wrap:wrap;padding:17px;background:var(--white);border:1px solid var(--line);border-radius:12px}.sources label{font-size:11px}.sources select{min-width:280px;max-width:80vw}.sources input{max-width:310px;padding:7px}.sources button{font-size:12px}#status{min-height:1.6em;color:#ebafb7;margin:12px 0;font-size:12px}#sourceTitle{font-size:18px}#sourceNote{color:var(--muted);border-left:2px solid var(--accent);padding-left:12px;overflow-wrap:anywhere;margin:12px 0 20px;font-size:12px}.pipeline-page details{margin-top:20px;border:1px solid var(--line);padding:14px;border-radius:10px;font-size:12px}.pipeline-page #raw{max-height:400px;overflow:auto;white-space:pre-wrap;font:11px/1.7 Consolas,monospace;color:var(--muted)}#diagram:empty{padding:50px;text-align:center}#diagram:empty:before{content:'选择管线，或导入已保存的工作流 JSON。';color:var(--muted)}.pipeline-page .diagram-viewport svg{height:64vh}.app-bar nav a.active{color:#d8cfff;background:#2c293e;border-color:#443c63}@media(max-width:520px){.sources label,.sources button{width:100%}.sources select{min-width:0;max-width:100%}.pipeline-head{gap:12px}.pipeline-head p{font-size:12px}}
+  </style>
+  <script src="/assets/pipeline-diagram.js?v=1" defer></script><script src="/assets/pipeline-page.js?v=1" defer></script>
+</head>
+<body>
+<header class="app-bar"><a class="identity" href="/"><b>✦</b><span>Pipeline <strong>Studio</strong></span></a><nav aria-label="主导航"><a href="/">创作台</a><a href="/?view=library">作品</a><a href="/?view=research">研究</a><a class="active" href="/pipeline" aria-current="page">管线图</a></nav><span class="engine">只读查看</span></header>
+<main class="pipeline-page">
+  <header class="pipeline-head"><div><h1>管线图</h1><p>展开节点、连接、分支与循环。查看结构，不启动生成。</p></div><span class="readonly-label">只读画布</span></header>
+  <div class="sources"><label>查看来源<select id="sourceSelect" disabled><option value="">正在读取…</option></select></label><button id="reloadSources" type="button">重新读取</button><label>导入已有记录<input id="importWorkflow" type="file" accept=".json,application/json"></label></div>
+  <p id="status" role="status"></p><h2 id="sourceTitle">选择来源</h2><p id="sourceNote">模板展示可能的执行结构，不证明某张图实际经过了这些节点。</p>
+  <section id="diagram" aria-label="节点画布"></section>
+  <details><summary>原始数据与参数</summary><pre id="raw">尚未读取。</pre></details>
+</main>
+</body>
+</html>

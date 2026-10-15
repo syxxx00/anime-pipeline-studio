@@ -1,0 +1,341 @@
+[
+  {
+    "id": "none",
+    "name": "不使用图片",
+    "bindings": []
+  },
+  {
+    "id": "style_only",
+    "name": "单图仅画风",
+    "bindings": [
+      {
+        "slot": "style_a",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "layout_only",
+    "name": "单图仅构图",
+    "bindings": [
+      {
+        "slot": "layout_a",
+        "roles": [
+          "composition"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "pose_only",
+    "name": "单图仅姿态",
+    "bindings": [
+      {
+        "slot": "pose_a",
+        "roles": [
+          "pose"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "identity_only",
+    "name": "单图仅身份",
+    "bindings": [
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "identity_consensus",
+    "name": "同一人物多图",
+    "bindings": [
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "person_a_second",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "identity_outfit",
+    "name": "身份/外观来自不同图",
+    "bindings": [
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "outfit_a",
+        "roles": [
+          "appearance"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "one_image_many_roles",
+    "name": "同图启用多个维度",
+    "bindings": [
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity",
+          "appearance",
+          "composition"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "style_identity_layout",
+    "name": "三图分工",
+    "bindings": [
+      {
+        "slot": "style_a",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "layout_a",
+        "roles": [
+          "composition"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "two_styles",
+    "name": "两张风格参考",
+    "bindings": [
+      {
+        "slot": "style_a",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "style_b",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "two_people",
+    "name": "两个人物分别绑定",
+    "bindings": [
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "person_b",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_b",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "style_a",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "all_roles",
+    "name": "多维度独立来源",
+    "bindings": [
+      {
+        "slot": "style_a",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "layout_a",
+        "roles": [
+          "composition"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "pose_a",
+        "roles": [
+          "pose"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "outfit_a",
+        "roles": [
+          "appearance"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "scene_a",
+        "roles": [
+          "environment",
+          "objects"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "light_a",
+        "roles": [
+          "lighting",
+          "palette"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "style_swap",
+    "name": "更换画风其余不变",
+    "bindings": [
+      {
+        "slot": "style_b",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "person_a",
+        "roles": [
+          "identity"
+        ],
+        "subject_id": "person_a",
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      },
+      {
+        "slot": "layout_a",
+        "roles": [
+          "composition"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  },
+  {
+    "id": "style_b_only",
+    "name": "仅替换画风参考B",
+    "bindings": [
+      {
+        "slot": "style_b",
+        "roles": [
+          "style"
+        ],
+        "subject_id": null,
+        "region": null,
+        "strength": "method_specific_calibration_pending"
+      }
+    ]
+  }
+]

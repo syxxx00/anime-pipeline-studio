@@ -1,0 +1,128 @@
+{
+  "name": "全面管线边界矩阵",
+  "notes": "待用户确认文本与路线后手动启动。所有图片保留；check 只报告，不自动淘汰；自动手部重绘与伪文字擦除关闭；明日方舟身份事实来自已审计知识库。",
+  "seeds": [42, 3407],
+  "texts": [
+    {
+      "id": "w_detonator",
+      "character": "W",
+      "boundary": "明确手部-道具-按钮关系",
+      "sentence": "明日方舟的W在昏暗仓库里坏笑着，用右手握住黑色长方形起爆器，并用右手拇指按下顶部唯一的红色按钮；左手自然垂下，半身正面构图，起爆器和拇指必须清楚可见。"
+    },
+    {
+      "id": "w_ruins_storm",
+      "character": "W",
+      "boundary": "动态全身与复杂天气背景",
+      "sentence": "明日方舟的W站在暴雨中的城市废墟上，爆炸后的火光从远处照亮她的轮廓，风吹动白发和外套；她回头露出危险的笑容，全身低机位构图，双手可见，背景必须是连续的街道与建筑残骸。"
+    },
+    {
+      "id": "w_minimal",
+      "character": "W",
+      "boundary": "极少信息与模型自行补全",
+      "sentence": "明日方舟的W，安静、危险，站在红色暮光里。"
+    },
+    {
+      "id": "specter_reef_poetic",
+      "character": "幽灵鲨",
+      "boundary": "已确认的抽象诗性环境",
+      "sentence": "明日方舟的幽灵鲨坐在礁石上，此时正是黄昏，云朵像暴风雨的前奏一样，风中都带着轻快，她似乎是放空了大脑，平静地坐在那里，就像一座雕塑。"
+    },
+    {
+      "id": "specter_weapon",
+      "character": "幽灵鲨",
+      "boundary": "双手持大型武器及形状完整性",
+      "sentence": "明日方舟的幽灵鲨在废弃教堂中双手握住巨大的圆锯武器，圆形锯片、握柄和双手接触位置都完整清楚；她身体微微前倾准备冲刺，全身三分之二侧面构图，彩色玻璃的冷光落在地面。"
+    },
+    {
+      "id": "specter_underwater_memory",
+      "character": "幽灵鲨",
+      "boundary": "超现实但对象必须明确",
+      "sentence": "明日方舟的幽灵鲨站在仿佛沉入海底的长廊中，四周漂浮的是清楚可辨的气泡、水草和破损石柱，而不是无意义碎片；她闭着眼触摸胸前的十字架，画面宁静、幽暗，人物与长廊都完整可读。"
+    },
+    {
+      "id": "amiya_documents",
+      "character": "阿米娅",
+      "boundary": "双手拿纸张与服装文字保护",
+      "sentence": "明日方舟的阿米娅坐在罗德岛办公室的桌前，双手拿着一份没有可读文字的任务报告，低头认真阅读；桌上只有台灯、杯子和整齐文件，兔耳完整，半身偏远构图，手指与纸张边缘清楚。"
+    },
+    {
+      "id": "amiya_arts",
+      "character": "阿米娅",
+      "boundary": "法术特效与手势不被光效遮蔽",
+      "sentence": "明日方舟的阿米娅在荒原上施放源石技艺，右手向前张开、五指可辨，左手护在胸前；黑色法术环围绕右手但不能遮住手掌，远处是连贯的山脉和阴云，全身动态构图。"
+    },
+    {
+      "id": "amiya_crowd",
+      "character": "阿米娅",
+      "boundary": "复杂人群背景与主角保持突出",
+      "sentence": "明日方舟的阿米娅穿过拥挤的移动城市车站，周围旅客形成清楚但简化的背景人群，她抱着文件袋向前快走；主角完整、不被人群肢体穿插，广角环境构图，站台结构连续。"
+    },
+    {
+      "id": "kangel_stream",
+      "character": "超天酱",
+      "boundary": "自拍手势、屏幕和伪文字",
+      "sentence": "超天酱坐在粉色直播房间里对镜头直播，左手拿着手机，右手在脸旁做V字手势，两只手和手机边缘清楚；显示器只有抽象界面色块而没有乱码，人物保持原作动漫造型，半身构图。"
+    },
+    {
+      "id": "kangel_stage",
+      "character": "超天酱",
+      "boundary": "舞台全身、观众与强光",
+      "sentence": "超天酱站在大型偶像舞台中央向观众挥手，全身可见，粉蓝色聚光灯从身后照来；舞台、护栏和观众荧光棒形成连续空间，人物不能变成写实真人，面部和服装保持原作辨识度。"
+    },
+    {
+      "id": "kangel_chibi",
+      "character": "超天酱",
+      "boundary": "Q版专长与简单对象关系",
+      "style_mode": "chibi",
+      "sentence": "Q版超天酱坐在巨大的粉色键盘按键上，双手抱着一个清楚完整的心形抱枕，开心地晃着双腿；纯色浅蓝背景，贴纸式干净轮廓，不出现文字。"
+    },
+    {
+      "id": "misaka_railgun",
+      "character": "御坂美琴",
+      "boundary": "经典动作、手指硬币与高速特效",
+      "sentence": "御坂美琴在夜晚的桥上用右手拇指弹起一枚硬币，硬币位于拇指正上方且形状清楚，左手向后保持平衡；橙色电磁炮光轨从硬币方向射向远处，全身动态侧面构图，手部不能被电光遮住。"
+    },
+    {
+      "id": "misaka_vending_machine",
+      "character": "御坂美琴",
+      "boundary": "单腿动作、身体平衡和大型物体",
+      "sentence": "御坂美琴在放学后的街边恼火地踢自动售货机，右脚接触机器下部，左脚稳稳站地，双腿连接与重心自然；自动售货机保持完整长方体结构但不出现可读文字，常盘台校服正确，全身广角构图。"
+    },
+    {
+      "id": "misaka_minimal_summer",
+      "character": "御坂美琴",
+      "boundary": "含义宽泛、信息缺失",
+      "sentence": "御坂美琴，夏天，风很轻，她刚刚想起一件好笑的事情。"
+    }
+  ],
+  "recipes": [
+    {"id": "newbie_free", "pipeline": "newbie", "style_preset": ""},
+    {"id": "newbie_2d", "pipeline": "newbie", "style_preset": "2d"},
+    {"id": "newbie_screenshot", "pipeline": "newbie", "style_preset": "2d-ln-su-shi-ziyongnb"},
+    {"id": "anima_free", "pipeline": "anima", "style_preset": ""},
+    {"id": "anima_2d", "pipeline": "anima", "style_preset": "2d"},
+    {"id": "anima_screenshot", "pipeline": "anima", "style_preset": "2d-ln-su-shi-ziyongnb"},
+    {"id": "illustrious_free", "pipeline": "illustrious", "style_preset": ""},
+    {"id": "illustrious_2d", "pipeline": "illustrious", "style_preset": "2d"},
+    {"id": "illustrious_screenshot", "pipeline": "illustrious", "style_preset": "2d-ln-su-shi-ziyongnb"},
+    {"id": "z_free", "pipeline": "z_image_turbo", "style_preset": ""},
+    {"id": "z_2d", "pipeline": "z_image_turbo", "style_preset": "2d"},
+    {"id": "z_screenshot", "pipeline": "z_image_turbo", "style_preset": "2d-ln-su-shi-ziyongnb"},
+    {"id": "hybrid_free_to_2d", "pipeline": "anima_newbie", "composition_style_preset": "", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "hybrid_2d_to_2d", "pipeline": "anima_newbie", "composition_style_preset": "2d", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "hybrid_screenshot", "pipeline": "anima_newbie", "composition_style_preset": "2d-ln-su-shi-ziyongnb", "character_style_preset": "2d-ln-su-shi-ziyongnb", "hybrid_denoise": 0.18},
+    {"id": "illustrious_free_to_2d", "pipeline": "illustrious_newbie", "composition_style_preset": "", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "illustrious_2d_to_2d", "pipeline": "illustrious_newbie", "composition_style_preset": "2d", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "illustrious_screenshot_bridge", "pipeline": "illustrious_newbie", "composition_style_preset": "2d-ln-su-shi-ziyongnb", "character_style_preset": "2d-ln-su-shi-ziyongnb", "hybrid_denoise": 0.18},
+    {"id": "z_free_to_2d", "pipeline": "z_newbie", "composition_style_preset": "", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "z_2d_to_2d", "pipeline": "z_newbie", "composition_style_preset": "2d", "character_style_preset": "2d", "hybrid_denoise": 0.18},
+    {"id": "z_screenshot_bridge", "pipeline": "z_newbie", "composition_style_preset": "2d-ln-su-shi-ziyongnb", "character_style_preset": "2d-ln-su-shi-ziyongnb", "hybrid_denoise": 0.18}
+  ],
+  "focused_denoise": {
+    "text_ids": ["w_detonator", "specter_reef_poetic", "specter_weapon", "amiya_arts", "kangel_stream", "misaka_railgun"],
+    "values": [0.12, 0.24, 0.3],
+    "source_pipelines": ["anima_newbie", "illustrious_newbie", "z_newbie"],
+    "composition_style_preset": "",
+    "character_style_preset": "2d"
+  }
+}
